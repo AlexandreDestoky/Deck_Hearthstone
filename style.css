@@ -9,3 +9,12 @@
 .classeHS > img {
   width:50px;
 }
+
+
+.carteAffichage {
+  display:flex;
+  flex-wrap:wrap
+}
+.carte > img {
+  width:200px;
+}
