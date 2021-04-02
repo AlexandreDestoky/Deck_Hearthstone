@@ -1,0 +1,11 @@
+* {
+  margin:0;
+  padding:0;
+}
+
+.choixClasse {
+  display: flex;
+}
+.classeHS > img {
+  width:50px;
+}
