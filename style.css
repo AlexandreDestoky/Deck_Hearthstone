@@ -1,29 +1,43 @@
-/* STYLE GENERAUX */
+/* ---------- STYLE GENERAUX ---------- */
 * {
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  background-color: #F0E7D8;
+  background-color: #f0e7d8;
 }
 
 h1 {
   text-align: center;
 }
-/* CHOIX DE LA CLASSE */
+
+.deck ::-webkit-scrollbar {
+  width: 6px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: red; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000; 
+}
+/* ---------- CHOIX DE LA CLASSE ----------*/
 .choixClasse {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-
 }
 .classeHS > img {
-  width:50px;
+  width: 50px;
 }
 
-/* BARRE DE TRI */
+/*---------- BARRE DE TRI ----------*/
 .barreTri {
   display: flex;
   flex-wrap: wrap;
@@ -40,95 +54,80 @@ h1 {
   flex-direction: column;
 }
 
-/* CARTES + DECK */
+/*---------- CARTES + DECK ----------*/
 .creation {
   display: flex;
   flex-wrap: wrap;
 }
 
-/* CARTES */
-
-
-
-/* AFFICHAGE DES CARTES */
+/*---------- CARTES ----------*/
 .carteAffichage {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:space-evenly;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 .carte > img {
-  width:175px;
+  width: 175px;
 }
 
-/* DECK */
+/*---------- DECK---------- */
 .deck {
-  background-color:brown;
-  margin:0;
-  padding:0;
+  background-color: brown;
+  margin: 0;
+  padding: 0;
+  height: fit-content;
+  position: sticky;
+  top: 20px;
 }
-/* HEADER DECK */
+/* HEADER DECK*/
 .classeCard {
-  height:50px;
-  display:flex;
-  background:green;
-  align-content: center;
+  height: 50px;
+  display: flex;
+  background: green;
+  align-items: center;
   justify-content: space-around;
 }
 
 .classeCard p {
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
+}
+/* L'ENSEMBLE DES CARTE DANS DECK */
+.deckListe {
+  max-height: calc(100vh - 90px);
+  overflow: auto;
 }
 
 /* CARTE DANS DECK */
 .carteListe {
-display: flex;
-background:grey;
-justify-content: space-between;
-align-items: center;
-border:1px solid black;
-height:40px;
-margin: .2rem 0;
+  display: flex;
+  background: grey;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  height: 40px;
+  margin: 0.2rem 0;
+
 }
 
 .carteListe > * {
   text-align: center;
-  padding:0;
-  margin:0;
+  padding: 0;
+  margin: 0;
   display: block;
 }
 
-.coutMana, .nbrExemplaire {
-  width:10%;
-  color:#eee;
-  margin: .2rem;
+.coutMana,
+.nbrExemplaire {
+  width: 10%;
+  color: #eee;
+  margin: 0.2rem;
   border-radius: 15%;
 }
 
 .coutMana {
-  background:navy;
+  background: navy;
 }
 .nbrExemplaire {
-  background: rgba(0,0,0,.5);
+  background: rgba(0, 0, 0, 0.5);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
