@@ -3,14 +3,55 @@
   padding:0;
 }
 
+body {
+  background-color: #F0E7D8;
+}
+/* CHOIX DE LA CLASSE */
 .choixClasse {
   display: flex;
+  justify-content: space-around;
+
 }
 .classeHS > img {
   width:50px;
 }
 
+/* BARRE DE TRI */
+.barreTri {
+  display: flex;
+  flex-wrap: wrap;
 
+}
+
+.barreTri > * {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* AFFICHAGE DES CARTES */
 .carteAffichage {
   display:flex;
   flex-wrap:wrap
