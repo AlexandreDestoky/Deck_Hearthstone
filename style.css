@@ -16,16 +16,16 @@ h1 {
 .deck ::-webkit-scrollbar {
   width: 6px;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: red; 
+  background: red;
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #b30000; 
+  background: #b30000;
 }
 /* ---------- CHOIX DE LA CLASSE ----------*/
 .choixClasse {
@@ -107,7 +107,25 @@ h1 {
   border: 1px solid black;
   height: 40px;
   margin: 0.2rem 0;
+  /* position: sticky; */
+}
 
+.carteListe:hover:before {
+  /* content: url(images/barjaqueur.png);
+  display: block;
+  position: absolute;
+  background-size: 200px 400px; */
+  background-image: url("images/barjaqueur.png");
+  background-size: 175px 245px;
+  /* display: inline-block; */
+  position: absolute;
+  /* top:500px; */
+  left:-175px;
+  top: calc((100vh - 245px) / 2);
+  width: 175px;
+  height: 245px;
+  content: "";
+  z-index: 3;
 }
 
 .carteListe > * {
