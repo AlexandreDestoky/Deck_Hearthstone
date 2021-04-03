@@ -1,15 +1,22 @@
+/* STYLE GENERAUX */
 * {
   margin:0;
   padding:0;
+  box-sizing: border-box;
 }
 
 body {
   background-color: #F0E7D8;
 }
+
+h1 {
+  text-align: center;
+}
 /* CHOIX DE LA CLASSE */
 .choixClasse {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
 
 }
 .classeHS > img {
@@ -20,7 +27,12 @@ body {
 .barreTri {
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
 
+.barreTri label {
+  font-weight: bold;
+  margin: 1rem 0 0 0;
 }
 
 .barreTri > * {
@@ -28,34 +40,95 @@ body {
   flex-direction: column;
 }
 
+/* CARTES + DECK */
+.creation {
+  display: flex;
+  flex-wrap: wrap;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* CARTES */
 
 
 
 /* AFFICHAGE DES CARTES */
 .carteAffichage {
   display:flex;
-  flex-wrap:wrap
+  flex-wrap:wrap;
+  justify-content:space-evenly;
 }
 .carte > img {
-  width:200px;
+  width:175px;
 }
+
+/* DECK */
+.deck {
+  background-color:brown;
+  margin:0;
+  padding:0;
+}
+/* HEADER DECK */
+.classeCard {
+  height:50px;
+  display:flex;
+  background:green;
+  align-content: center;
+  justify-content: space-around;
+}
+
+.classeCard p {
+  margin:0;
+  padding:0;
+}
+
+/* CARTE DANS DECK */
+.carteListe {
+display: flex;
+background:grey;
+justify-content: space-between;
+align-items: center;
+border:1px solid black;
+height:40px;
+margin: .2rem 0;
+}
+
+.carteListe > * {
+  text-align: center;
+  padding:0;
+  margin:0;
+  display: block;
+}
+
+.coutMana, .nbrExemplaire {
+  width:10%;
+  color:#eee;
+  margin: .2rem;
+  border-radius: 15%;
+}
+
+.coutMana {
+  background:navy;
+}
+.nbrExemplaire {
+  background: rgba(0,0,0,.5);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
