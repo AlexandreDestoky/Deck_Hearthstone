@@ -6,13 +6,17 @@
 }
 
 body {
-  background-color: #f0e7d8;
+  background-color: #191919;
+  color:#eee;
 }
 
 h1 {
+  margin: 1em;;
   text-align: center;
+  color:#eee;
+  font-size:2.3rem;
 }
-
+/* AUGMENTATION TAILLE CONTAINER EN GRAND ECRAN (CONTRER BOOTSTRAP) */
 @media (min-width: 1500px) {
   .container,
   .container-lg,
@@ -23,17 +27,15 @@ h1 {
   }
 }
 
-
-.deck ::-webkit-scrollbar {
+/* STYLISATION BARRE DE SCROLL */
+ ::-webkit-scrollbar {
   width: 6px;
 }
-
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: red;
+  background: #e62832;
   border-radius: 10px;
 }
-
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #b30000;
@@ -45,7 +47,7 @@ h1 {
   flex-wrap: wrap;
 }
 .classeHS > img {
-  width: 62px;
+  width: 80px;
   border-radius: 150px;
   border: 4px solid black;
   margin: 5px;
@@ -65,6 +67,7 @@ h1 {
 .barreTri label {
   font-weight: bold;
   margin: 1rem 0 0 0;
+  font-size:1.4em;
 }
 
 .barreTri > * {
@@ -72,10 +75,19 @@ h1 {
   flex-direction: column;
 }
 
+.barreTri select  {
+  height:40px;
+  background-color:#eee;
+  text-align: center;
+}
+.barreTri select:focus {
+  box-shadow:inset 0px 0px 11px 0px rgba(0,0,0,0.4)
+}
 /*--------------------------------------- CARTES + DECK ---------------------------------------*/
 .creation {
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 30px;
 }
 
 /*--------------------------------------- CARTES ---------------------------------------*/
@@ -90,62 +102,63 @@ h1 {
   height: 50px;
 }
 .classeDeck {
-  background: orange;
+  background: #3D5A80;
+  border-radius:10px 0 0 0;
 }
 .neutre {
-  background: purple;
+  background:#7A542E;
+  border-radius:0 10px 0 0;
 }
 .choixClasseCarte {
   display: flex;
   height: 50px;
   width: 100%;
 }
-.carteChoix {
-  position: sticky;
-  top: 20px;
-}
+/* LISTE DES CARTES */
 .carteAffichage {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  background: rgba(255, 255, 0, 0.3);
-  /* max-height: calc(100vh - 90px); */
+  background:#937B63;
+  /* background: lightslategray; couleur carte de classe*/
   max-height: calc(100vh - 90px);
-
   overflow: auto;
+  padding-top:10px;
+  border-left:5px solid #7A542E;
+  border:5px solid #7A542E;
 }
 .carte > img {
   width: 200px;
 }
-
+/* Carte pleine largeur en mode smartphone */
 @media (max-width: 576px) {
   .carte > img {
     width: 100%;
   }
   .carteChoix {
     margin-bottom: 20px;
-    position: static;
   }
 }
 
 /*----------------------------- DECK------------------------------ */
 .deck {
-  background-color: brown;
+  
   margin: 0;
   padding: 0;
   height: fit-content;
-  position: sticky;
-  top: 20px;
+  /* position: sticky; */
+  /* top: 20px; */
 }
 /* HEADER DECK*/
 .classeCard {
   height: 50px;
   display: flex;
-  background: green;
+  background: firebrick;
   align-items: center;
   justify-content: space-around;
+  border-radius:10px 10px 0 0;
 }
-
+/* Annulation bootstrap */
 .classeCard p {
   margin: 0;
   padding: 0;
@@ -154,19 +167,27 @@ h1 {
 .deckListe {
   max-height: calc(100vh - 90px);
   overflow: auto;
+  background-color: #B80000;
+  background:#ff1a1a;
+  /* background:#CE403B; */
+  background:white;
+  border:5px solid firebrick;
 }
 
 /* CARTE DANS DECK */
 .carteListe {
   display: flex;
-  background: grey;
+  /* background: grey; */
+  /* background:#981D1D; */
+  background:rgba(0,0, 0, .9);
   justify-content: space-between;
   align-items: center;
-  border: 1px solid black;
-  height: 40px;
-  margin: 0.2rem 0;
+  border: 2px solid black;
+  border-radius: 4px;
+  height: 45px;
+  /* margin: 0.4rem; */
 }
-
+/* Carte Survol */
 .carteListe:hover:before {
   background-image: url("images/gravure.png");
   background-size: 175px 245px;
@@ -177,7 +198,7 @@ h1 {
   height: 245px;
   content: "";
 }
-
+/* Stylisation liste des cartes dans deck */
 .carteListe > * {
   text-align: center;
   padding: 0;
@@ -185,19 +206,24 @@ h1 {
   display: block;
 }
 
+/* info carte deck */
 .coutMana,
 .nbrExemplaire {
   width: 10%;
   color: #eee;
-  margin: 0.2rem;
-  border-radius: 15%;
+  margin: 0.3rem;
+  padding:.1em;
 }
 
 .coutMana {
-  background: navy;
+  /* background: rgba(50, 50, 50, .5); */
+  background: #0d4059;
+  border-radius:100px;
 }
 .nbrExemplaire {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 15%;
+
 }
 
 /*----------------------------- FOOTER -----------------------------*/
