@@ -7,15 +7,16 @@
 
 body {
   background-color: #191919;
-  color:#eee;
+  color: #eee;
 }
 
 h1 {
-  margin: 1em;;
+  margin: 1em;
   text-align: center;
-  color:#eee;
-  font-size:2.3rem;
+  color: #eee;
+  font-size: 2.3rem;
 }
+
 /* AUGMENTATION TAILLE CONTAINER EN GRAND ECRAN (CONTRER BOOTSTRAP) */
 @media (min-width: 1500px) {
   .container,
@@ -28,33 +29,67 @@ h1 {
 }
 
 /* STYLISATION BARRE DE SCROLL */
- ::-webkit-scrollbar {
+/* Largeur de la barre */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+.deck ::-webkit-scrollbar,
+.carteChoix ::-webkit-scrollbar {
   width: 6px;
 }
-/* Handle */
+
+/* Style de la barre */
 ::-webkit-scrollbar-thumb {
   background: #e62832;
   border-radius: 10px;
 }
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #b30000;
+
+.deck ::-webkit-scrollbar-thumb {
+  border-radius: 0;
+  background: grey;
 }
+
+.carteChoix ::-webkit-scrollbar-thumb {
+  border-radius: 0;
+  background: #543926;
+}
+
+/* POINTEUR CURSEUR  */
+.classeHS > img,
+select,
+.choixClasseCarte,
+.carte,
+.carteListe {
+  cursor: pointer;
+}
+
 /* --------------------------------------- CHOIX DE LA CLASSE ---------------------------------------*/
 .choixClasse {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
 }
+
 .classeHS > img {
   width: 80px;
   border-radius: 150px;
   border: 4px solid black;
   margin: 5px;
+  opacity: 0.3;
 }
 
 .classeHS > img:hover {
-  border: 4px solid red;
+  border: 4px solid firebrick;
+}
+
+.active > img {
+  border: 4px solid green;
+  opacity: 1;
+}
+
+.active > img:hover {
+  border: 4px solid green;
 }
 
 /*--------------------------------------- BARRE DE TRI ---------------------------------------*/
@@ -67,7 +102,7 @@ h1 {
 .barreTri label {
   font-weight: bold;
   margin: 1rem 0 0 0;
-  font-size:1.4em;
+  font-size: 1.4em;
 }
 
 .barreTri > * {
@@ -75,14 +110,16 @@ h1 {
   flex-direction: column;
 }
 
-.barreTri select  {
-  height:40px;
-  background-color:#eee;
+.barreTri select {
+  height: 40px;
+  background-color: #eee;
   text-align: center;
 }
+
 .barreTri select:focus {
-  box-shadow:inset 0px 0px 11px 0px rgba(0,0,0,0.4)
+  box-shadow: inset 0px 0px 11px 0px rgba(0, 0, 0, 0.4);
 }
+
 /*--------------------------------------- CARTES + DECK ---------------------------------------*/
 .creation {
   display: flex;
@@ -91,7 +128,7 @@ h1 {
 }
 
 /*--------------------------------------- CARTES ---------------------------------------*/
-/* CHOIX CARTE CLASSE OU NEUTRE */
+/* HEADER LISTE CARTE : CHOIX CARTE CLASSE OU NEUTRE */
 .classeDeck,
 .neutre {
   height: 50px;
@@ -100,55 +137,80 @@ h1 {
   justify-content: space-around;
   width: 50%;
   height: 50px;
+  font-family: "Rubik", sans-serif;
+  font-weight: bold;
+  padding:.4em;
+  text-align: center;
+  user-select: none;
 }
+
 .classeDeck {
-  background: #3D5A80;
-  border-radius:10px 0 0 0;
+  background: #3d5a80;
+  border-radius: 10px 0 0 0;
 }
+
+.classeDeck:hover {
+  background:#293d56;
+}
+
 .neutre {
-  background:#7A542E;
-  border-radius:0 10px 0 0;
+  background: #7a542e;
+  border-radius: 0 10px 0 0;
 }
+
+/* .neutre:hover {
+  background:#382615;
+} */
+
 .choixClasseCarte {
   display: flex;
   height: 50px;
   width: 100%;
 }
+
 /* LISTE DES CARTES */
 .carteAffichage {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  background:#937B63;
+  background: #937b63;
   /* background: lightslategray; couleur carte de classe*/
   max-height: calc(100vh - 90px);
   overflow: auto;
-  padding-top:10px;
-  border-left:5px solid #7A542E;
-  border:5px solid #7A542E;
+  padding-top: 10px;
+  border-left: 5px solid #7a542e;
+  border: 5px solid #7a542e;
+  padding-bottom: 30px;
 }
+
 .carte > img {
   width: 200px;
 }
+
+.carteChoix {
+  margin-bottom: 20px;
+}
+
+/* Si plus d'exmplaire pour carte */
+.indisponible {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
 /* Carte pleine largeur en mode smartphone */
 @media (max-width: 576px) {
   .carte > img {
     width: 100%;
   }
-  .carteChoix {
-    margin-bottom: 20px;
-  }
 }
 
 /*----------------------------- DECK------------------------------ */
 .deck {
-  
   margin: 0;
   padding: 0;
   height: fit-content;
-  /* position: sticky; */
-  /* top: 20px; */
 }
+
 /* HEADER DECK*/
 .classeCard {
   height: 50px;
@@ -156,37 +218,45 @@ h1 {
   background: firebrick;
   align-items: center;
   justify-content: space-around;
-  border-radius:10px 10px 0 0;
+  border-radius: 10px 10px 0 0;
+  font-family: "Rubik", sans-serif;
+  font-weight: bold;
 }
+
 /* Annulation bootstrap */
 .classeCard p {
   margin: 0;
   padding: 0;
 }
+
 /* L'ENSEMBLE DES CARTE DANS DECK */
 .deckListe {
   max-height: calc(100vh - 90px);
   overflow: auto;
-  background-color: #B80000;
-  background:#ff1a1a;
-  /* background:#CE403B; */
-  background:white;
-  border:5px solid firebrick;
+  border: 5px solid firebrick;
 }
 
 /* CARTE DANS DECK */
 .carteListe {
   display: flex;
-  /* background: grey; */
-  /* background:#981D1D; */
-  background:rgba(0,0, 0, .9);
+  background: repeating-linear-gradient(170deg, black, transparent 35px);
   justify-content: space-between;
   align-items: center;
   border: 2px solid black;
-  border-radius: 4px;
   height: 45px;
-  /* margin: 0.4rem; */
+  user-select: none;
+  font-weight: bold;
 }
+.couleurLegendaire {
+  color:#fdc500;
+}
+.couleurEpique {
+  color:purple;
+}
+.couleurRare {
+  color: #0077b6;
+}
+
 /* Carte Survol */
 .carteListe:hover:before {
   background-image: url("images/gravure.png");
@@ -198,6 +268,7 @@ h1 {
   height: 245px;
   content: "";
 }
+
 /* Stylisation liste des cartes dans deck */
 .carteListe > * {
   text-align: center;
@@ -212,23 +283,24 @@ h1 {
   width: 10%;
   color: #eee;
   margin: 0.3rem;
-  padding:.1em;
+  padding: 0.1em;
 }
 
 .coutMana {
-  /* background: rgba(50, 50, 50, .5); */
   background: #0d4059;
-  border-radius:100px;
+  border-radius: 100px;
 }
+
 .nbrExemplaire {
   background: rgba(0, 0, 0, 0.85);
   border-radius: 15%;
-
 }
 
 /*----------------------------- FOOTER -----------------------------*/
-footer {
-  font-size: 30px;
-  height: 50px;
-  background: lightblue;
+footer p {
+  font-size: 1rem;
+  background: #0d4059;
+  text-align: center;
+  margin-bottom: 0;
+  font-family: "Rubik", sans-serif;
 }

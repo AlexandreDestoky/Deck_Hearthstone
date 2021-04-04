@@ -5,26 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Créateur deck Hearthstone</title>
+    <link rel="icon" href="images/favicon.ico" />
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
       crossorigin="anonymous"
     />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <h1>Constructeur de Deck Hearthstone</h1>
     <div class="container">
       <div class="choixClasse">
-        <!------------ CLASSE HEARTHSTONE---------- -->
+        <!---------------------- CLASSE HEARTHSTONE-------------------- -->
         <div class="classeHS">
           <img src="images/chaman.jpg" alt="" />
         </div>
         <div class="classeHS">
           <img src="images/chasseur-de-demons.jpg" alt="" />
         </div>
-        <div class="classeHS">
+        <div class="classeHS active">
           <img src="images/chasseur.jpg" alt="" />
         </div>
         <div class="classeHS">
@@ -50,7 +53,7 @@
         </div>
       </div>
 
-      <!------------ BARRE DE TRI ----------  -->
+      <!--------------------------- BARRE DE TRI -------------------------  -->
       <div class="barreTri">
         <div class="mana col-12 col-md-3">
           <label for="manaOption">Mana</label>
@@ -133,25 +136,25 @@
           </select>
         </div>
       </div>
-      <!------------ CARTE + ESPACE DECK---------- -->
+      <!--------------------------- CARTE + ESPACE DECK------------------------- -->
       <div class="creation">
-        <!------------ CARTE ------------>
+        <!--------------------------- CARTE --------------------------->
         <div class="carteChoix col-12 col-md-8">
           <div class="choixClasseCarte">
-            <div class="classeDeck">Cartes Chaman</div>
-            <div class="neutre">Cartes Neutres</div>
+            <div class="classeDeck">CARTES CHAMAN</div>
+            <div class="neutre">CARTES NEUTRES</div>
           </div>
           <div class="carteAffichage">
             <div class="carte"><img src="images/barjaqueur.png" alt="" /></div>
             <div class="carte"><img src="images/barjaqueur.png" alt="" /></div>
+            <div class="carte indisponible"><img src="images/barjaqueur.png" alt="" /></div>
             <div class="carte"><img src="images/barjaqueur.png" alt="" /></div>
             <div class="carte"><img src="images/barjaqueur.png" alt="" /></div>
             <div class="carte"><img src="images/barjaqueur.png" alt="" /></div>
             <div class="carte"><img src="images/barjaqueur.png" alt="" /></div>
             <div class="carte"><img src="images/barjaqueur.png" alt="" /></div>
             <div class="carte"><img src="images/barjaqueur.png" alt="" /></div>
-            <div class="carte"><img src="images/barjaqueur.png" alt="" /></div>
-            <div class="carte"><img src="images/barjaqueur.png" alt="" /></div>
+            <div class="carte indisponible"><img src="images/barjaqueur.png" alt="" /></div>
             <div class="carte"><img src="images/barjaqueur.png" alt="" /></div>
             <div class="carte"><img src="images/barjaqueur.png" alt="" /></div>
             <div class="carte"><img src="images/barjaqueur.png" alt="" /></div>
@@ -185,150 +188,132 @@
           </div>
         </div>
 
-        <!-- DECK -->
+        <!-------------------------------- DECK -------------------------------->
         <div class="deck col-12 col-md-4">
           <div class="classeCard">
             <p>DECK CHAMAN</p>
             <p>0/30</p>
           </div>
           <div class="deckListe">
-            <!-- <div class="carteListe">
-              <span class="coutMana">6</span>
-              <span class="nom">Portail du sanctuaire du Serpent</span>
-              <span class="nbrExemplaire">X2</span>
-            </div>
-            <div class="carteListe">
-              <div class="coutMana">6</div>
-              <div class="nom">Portail du sanctuaire du Serpent</div>
-              <div class="nbrExemplaire">X2</div>
-            </div>
             <div class="carteListe">
               <p class="coutMana">6</p>
-              <p class="nom">Portail du sanctuaire du Serpent</p>
+              <p class="nom couleurLegendaire">Gravure Runiques</p>
               <p class="nbrExemplaire">X2</p>
             </div>
             <div class="carteListe">
-              <div class="coutMana">6</div>
-              <div class="nom">Portail du sanctuaire du Serpent</div>
-              <div class="nbrExemplaire">X2</div>
-            </div> -->
-            <div class="carteListe">
-              <div class="coutMana">6</div>
-              <div class="nom">Gravures Runiques</div>
-              <div class="nbrExemplaire">X2</div>
+              <p class="coutMana">6</p>
+              <p class="nom">Gravure Runiques</p>
+              <p class="nbrExemplaire">X1</p>
             </div>
             <div class="carteListe">
-              <div class="coutMana">6</div>
-              <div class="nom">Gravures Runiques</div>
-              <div class="nbrExemplaire">X2</div>
+              <p class="coutMana">6</p>
+              <p class="nom couleurEpique">Gravure Runiques</p>
+              <p class="nbrExemplaire">X2</p>
             </div>
             <div class="carteListe">
-              <div class="coutMana">6</div>
-              <div class="nom">Gravures Runiques</div>
-              <div class="nbrExemplaire">X2</div>
+              <p class="coutMana">6</p>
+              <p class="nom">Barjaqueur</p>
+              <p class="nbrExemplaire">X2</p>
             </div>
             <div class="carteListe">
-              <div class="coutMana">6</div>
-              <div class="nom">Gravures Runiques</div>
-              <div class="nbrExemplaire">X2</div>
+              <p class="coutMana">6</p>
+              <p class="nom couleurLegendaire">Gravure Runiques</p>
+              <p class="nbrExemplaire">X2</p>
             </div>
             <div class="carteListe">
-              <div class="coutMana">6</div>
-              <div class="nom">Gravures Runiques</div>
-              <div class="nbrExemplaire">X2</div>
+              <p class="coutMana">6</p>
+              <p class="nom">Bru'Kan</p>
+              <p class="nbrExemplaire">X2</p>
             </div>
             <div class="carteListe">
-              <div class="coutMana">6</div>
-              <div class="nom">Gravures Runiques</div>
-              <div class="nbrExemplaire">X2</div>
+              <p class="coutMana">6</p>
+              <p class="nom couleurRare">Gravure Runiques</p>
+              <p class="nbrExemplaire">X1</p>
             </div>
             <div class="carteListe">
-              <div class="coutMana">6</div>
-              <div class="nom">Gravures Runiques</div>
-              <div class="nbrExemplaire">X2</div>
+              <p class="coutMana">6</p>
+              <p class="nom">Gravure Runiques</p>
+              <p class="nbrExemplaire">X2</p>
             </div>
             <div class="carteListe">
-              <div class="coutMana">6</div>
-              <div class="nom">Gravures Runiques</div>
-              <div class="nbrExemplaire">X2</div>
+              <p class="coutMana">6</p>
+              <p class="nom">Gravure Runiques</p>
+              <p class="nbrExemplaire">X1</p>
             </div>
             <div class="carteListe">
-              <div class="coutMana">6</div>
-              <div class="nom">Gravures Runiques</div>
-              <div class="nbrExemplaire">X2</div>
+              <p class="coutMana">6</p>
+              <p class="nom couleur Rare">Gravure Runiques</p>
+              <p class="nbrExemplaire">X1</p>
             </div>
             <div class="carteListe">
-              <div class="coutMana">6</div>
-              <div class="nom">Gravures Runiques</div>
-              <div class="nbrExemplaire">X2</div>
+              <p class="coutMana">6</p>
+              <p class="nom">Gravure Runiques</p>
+              <p class="nbrExemplaire">X2</p>
             </div>
             <div class="carteListe">
-              <div class="coutMana">6</div>
-              <div class="nom">Gravures Runiques</div>
-              <div class="nbrExemplaire">X2</div>
+              <p class="coutMana">6</p>
+              <p class="nom">Gravure Runiques</p>
+              <p class="nbrExemplaire">X2</p>
             </div>
             <div class="carteListe">
-              <div class="coutMana">6</div>
-              <div class="nom">Gravures Runiques</div>
-              <div class="nbrExemplaire">X2</div>
+              <p class="coutMana">6</p>
+              <p class="nom">Gravure Runiques</p>
+              <p class="nbrExemplaire">X2</p>
             </div>
             <div class="carteListe">
-              <div class="coutMana">6</div>
-              <div class="nom">Gravures Runiques</div>
-              <div class="nbrExemplaire">X2</div>
+              <p class="coutMana">6</p>
+              <p class="nom">Gravure Runiques</p>
+              <p class="nbrExemplaire">X2</p>
             </div>
             <div class="carteListe">
-              <div class="coutMana">6</div>
-              <div class="nom">Gravures Runiques</div>
-              <div class="nbrExemplaire">X2</div>
+              <p class="coutMana">6</p>
+              <p class="nom">Gravure Runiques</p>
+              <p class="nbrExemplaire">X2</p>
             </div>
             <div class="carteListe">
-              <div class="coutMana">6</div>
-              <div class="nom">Gravures Runiques</div>
-              <div class="nbrExemplaire">X2</div>
+              <p class="coutMana">6</p>
+              <p class="nom">Gravure Runiques</p>
+              <p class="nbrExemplaire">X2</p>
             </div>
             <div class="carteListe">
-              <div class="coutMana">6</div>
-              <div class="nom">Gravures Runiques</div>
-              <div class="nbrExemplaire">X2</div>
+              <p class="coutMana">6</p>
+              <p class="nom">Gravure Runiques</p>
+              <p class="nbrExemplaire">X2</p>
             </div>
             <div class="carteListe">
-              <div class="coutMana">6</div>
-              <div class="nom">Gravures Runiques</div>
-              <div class="nbrExemplaire">X2</div>
+              <p class="coutMana">6</p>
+              <p class="nom">Gravure Runiques</p>
+              <p class="nbrExemplaire">X2</p>
             </div>
             <div class="carteListe">
-              <div class="coutMana">6</div>
-              <div class="nom">Gravures Runiques</div>
-              <div class="nbrExemplaire">X2</div>
+              <p class="coutMana">6</p>
+              <p class="nom">Gravure Runiques</p>
+              <p class="nbrExemplaire">X2</p>
             </div>
+            <div class="carteListe">
+              <p class="coutMana">6</p>
+              <p class="nom">Gravure Runiques</p>
+              <p class="nbrExemplaire">X2</p>
+            </div>
+            <div class="carteListe">
+              <p class="coutMana">6</p>
+              <p class="nom">Gravure Runiques</p>
+              <p class="nbrExemplaire">X2</p>
+            </div>
+            <div class="carteListe">
+              <p class="coutMana">6</p>
+              <p class="nom">Gravure Runiques</p>
+              <p class="nbrExemplaire">X2</p>
+            </div>
+            
           </div>
         </div>
       </div>
     </div>
+    <!-------------------------------- FOOTER -------------------------------->
     <footer>
-      <p>Cette Application est réalisé par Alexandre Destoky</p>
-      <p>
-        <span
-          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Et libero commodi nobis, doloribus dolores officiis
-          nisi ut voluptate earum? Architecto aperiam rem accusantium nobis in et rerum, harum obcaecati cum?</span
-        ><span
-          >Dicta soluta repudiandae distinctio doloremque fugiat corporis eos iste eaque illum voluptates numquam magni
-          placeat sint consequuntur veritatis consequatur, hic culpa dolore iure ipsum cumque voluptate ullam nihil
-          nemo. Maxime!</span
-        ><span
-          >Cum et nemo quas eos ratione, labore nostrum ducimus quis nobis fuga officia recusandae optio ullam sit
-          suscipit delectus culpa deserunt libero rerum hic incidunt! Voluptatum inventore praesentium tempora
-          enim.</span
-        ><span
-          >Id est quibusdam voluptas? Beatae et laboriosam minus natus veniam nostrum dolorem sint amet in, esse earum
-          fuga illum inventore voluptate aliquam laborum enim suscipit, harum labore laudantium, perferendis sed.</span
-        ><span
-          >Minus, voluptate facere odio nesciunt laudantium repellat sequi, velit commodi id obcaecati facilis,
-          asperiores explicabo perspiciatis veritatis. Accusantium, sed nisi. Doloremque molestias inventore cupiditate
-          ratione accusamus possimus explicabo omnis dignissimos.</span
-        >
-      </p>
+      <p>Cette Application est réalisé par :</p>
+      <p>Alexandre Destoky</p>
     </footer>
   </body>
 </html>
