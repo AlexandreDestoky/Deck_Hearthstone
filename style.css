@@ -34,7 +34,14 @@ h1 {
   flex-wrap: wrap;
 }
 .classeHS > img {
-  width: 50px;
+  width: 62px;
+  border-radius: 150px;
+  border: 4px solid black;
+  margin:5px;
+}
+
+.classeHS > img:hover {
+  border: 4px solid red;
 }
 
 /*---------- BARRE DE TRI ----------*/
@@ -107,25 +114,18 @@ h1 {
   border: 1px solid black;
   height: 40px;
   margin: 0.2rem 0;
-  /* position: sticky; */
 }
 
 .carteListe:hover:before {
-  /* content: url(images/barjaqueur.png);
-  display: block;
-  position: absolute;
-  background-size: 200px 400px; */
-  background-image: url("images/barjaqueur.png");
+
+  background-image: url("images/gravure.png");
   background-size: 175px 245px;
-  /* display: inline-block; */
   position: absolute;
-  /* top:500px; */
   left:-175px;
-  top: calc((100vh - 245px) / 2);
+  top: 150px;
   width: 175px;
   height: 245px;
   content: "";
-  z-index: 3;
 }
 
 .carteListe > * {
