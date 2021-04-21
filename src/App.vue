@@ -1,28 +1,39 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Constructeur de Deck Hearthstone</h1>
+    <div class="container">
+      <ChoixPerso />
+      <BarreTri />
+      <div class="creation">
+        <CarteChoix />
+        <Deck />
+      </div>
+    </div>
+    <!-------------------------------- FOOTER -------------------------------->
+    <footer>
+      <p>Cette Application est réalisé par :</p>
+      <p>Alexandre Destoky</p>
+    </footer>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ChoixPerso from "./components/ChoixPerso.vue";
+import BarreTri from "./components/BarreTri.vue";
+import CarteChoix from "./components/CarteChoix.vue";
+import Deck from "./components/Deck.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    ChoixPerso,
+    BarreTri,
+    CarteChoix,
+    Deck,
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import "./assets/css/style.css";
 </style>

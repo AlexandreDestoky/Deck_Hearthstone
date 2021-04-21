@@ -259,7 +259,7 @@ select,
 }
 
 /* Carte Survol */
-.carteListe:hover:before {
+/* .carteListe:hover:before {
   background-image: url("images/gravure.png");
   background-size: 175px 245px;
   position: absolute;
@@ -268,7 +268,7 @@ select,
   width: 175px;
   height: 245px;
   content: "";
-}
+} */
 
 /* Stylisation liste des cartes dans deck */
 .carteListe > * {
