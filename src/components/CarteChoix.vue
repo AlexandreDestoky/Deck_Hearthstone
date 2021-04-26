@@ -43,7 +43,7 @@ export default {
   methods: {
     fetchTest() {
       let tabTest = [];
-      fetch("https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/sets/Scholomance%20Academy", {
+      fetch("https://omgvamp-hearthstone-v1.p.rapidapi.com/cards", {
         method: "GET",
         headers: {
           "x-rapidapi-key": "c09d1f1348msh9846d0798360c9bp131a6bjsn1ec4841db391",
