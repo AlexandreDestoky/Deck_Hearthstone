@@ -6,7 +6,7 @@
       <div class="neutre">CARTES NEUTRES</div>
     </div>
     <div class="carteAffichage">
-      <template v-for="(tabObj) of tabCarte">
+      <template v-for="tabObj of tabCarte">
         <div class="carte" :key="ob.cardId" v-for="ob of tabObj">
           <img :src="ob.img" alt="" />
           <!-- <p>{{ob}}</p> -->
@@ -45,17 +45,17 @@ export default {
       })
         .then((reponse) => reponse.json())
         .then((response) => {
-          let ash = response["Ashes of Outland"];
-          ash = ash.filter((x) => x["collectible"] === true);
           let core = response["Core"];
           core = core.filter((x) => x["collectible"] === true);
+          let ash = response["Ashes of Outland"];
+          ash = ash.filter((x) => x["collectible"] === true);
           let sch = response["Scholomance Academy"];
           sch = sch.filter((x) => x["collectible"] === true);
           let mad = response["Madness At The Darkmoon Faire"];
           mad = mad.filter((x) => x["collectible"] === true);
           let forg = response["Forged in the Barrens"];
           forg = forg.filter((x) => x["collectible"] === true);
-          tabTest.push(ash, core, sch, mad, forg);
+          tabTest.push(core, ash, sch, mad, forg);
         });
       return tabTest;
     },

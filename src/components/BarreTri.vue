@@ -1,95 +1,126 @@
 <template>
-     <!--------------------------- BARRE DE TRI -------------------------  -->
-      <div class="barreTri">
-        <div class="mana col-12 col-md-3">
-          <label for="manaOption">Mana</label>
-          <select id="manaOption" name="manaOption">
-            <option value="all">Toutes</option>
-            <option value="0">Mana: 0</option>
-            <option value="1">Mana: 1</option>
-            <option value="2">Mana: 2</option>
-            <option value="3">Mana: 3</option>
-          </select>
-        </div>
-        <div class="extension col-12 col-md-3">
-          <label for="extensionOption">Extension</label>
-          <select id="extensionOption" name="extensionOption">
-            <option value="all">Toutes</option>
-            <option value="barrens">Barrens</option>
-            <option value="Scholomance">Scholomance</option>
-            <option value="Sombrelune">Sombrelune</option>
-            <option value="Fondamental">Fondamental</option>
-          </select>
-        </div>
-        <div class="attaque col-12 col-md-3">
-          <label for="attaqueOption">Attaque</label>
-          <select id="attaqueOption" name="attaqueOption">
-            <option value="all">Toutes</option>
-            <option value="0">Attaque: 0</option>
-            <option value="1">Attaque: 1</option>
-            <option value="2">Attaque: 2</option>
-            <option value="3">Attaque: 3</option>
-          </select>
-        </div>
-        <div class="vie col-12 col-md-3">
-          <label for="vieOption">Vie</label>
-          <select id="vieOption" name="vieOption">
-            <option value="all">Toutes</option>
-            <option value="0">Vie: 0</option>
-            <option value="1">Vie: 1</option>
-            <option value="2">Vie: 2</option>
-            <option value="3">Vie: 3</option>
-          </select>
-        </div>
-        <div class="typeCarte col-12 col-md-3">
-          <label for="typeCarteOption">Type</label>
-          <select id="typeCarteOption" name="typeCarteOption">
-            <option value="all">Tous</option>
-            <option value="Heros">Héros</option>
-            <option value="Serviteur">Serviteur</option>
-            <option value="Sort">Sort</option>
-            <option value="Arme">Arme</option>
-          </select>
-        </div>
-        <div class="race col-12 col-md-3">
-          <label for="raceOption">Race</label>
-          <select id="raceOption" name="raceOption">
-            <option value="all">Toutes</option>
-            <option value="bete">Bête</option>
-            <option value="demon">Demon</option>
-            <option value="dragon">Dragon</option>
-            <option value="elementaire">Elementaire</option>
-          </select>
-        </div>
-        <div class="rarete col-12 col-md-3">
-          <label for="rareteOption">Rareté</label>
-          <select id="rareteOption" name="rareteOption">
-            <option value="all">Toutes</option>
-            <option value="commune">Commune</option>
-            <option value="rare">Rare</option>
-            <option value="epique">Epique</option>
-            <option value="legendaire">Legendaire</option>
-          </select>
-        </div>
-        <div class="mecanique col-12 col-md-3">
-          <label for="mecaniqueOption">Mécanique</label>
-          <select id="mecaniqueOption" name="mecaniqueOption">
-            <option value="all">Toutes</option>
-            <option value="0">Attaque: 0</option>
-            <option value="1">Attaque: 1</option>
-            <option value="2">Attaque: 2</option>
-            <option value="3">Attaque: 3</option>
-          </select>
-        </div>
-      </div>
+  <!--------------------------- BARRE DE TRI -------------------------  -->
+  <div class="barreTri">
+    <div class="mana col-12 col-md-3">
+      <label for="manaOption">Mana</label>
+      <select id="manaOption" name="manaOption">
+        <option value="all">All</option>
+        <option value="0">Mana: 0</option>
+        <option value="1">Mana: 1</option>
+        <option value="2">Mana: 2</option>
+        <option value="3">Mana: 3</option>
+        <option value="4">Mana: 4</option>
+        <option value="5">Mana: 5</option>
+        <option value="6">Mana: 6</option>
+        <option value="7">Mana: 7</option>
+        <option value="8">Mana: 8</option>
+        <option value="9">Mana: 9</option>
+        <option value="10">Mana: 10</option>
+        <option value="11">Mana: 11</option>
+        <option value="12">Mana: 12</option>
+      </select>
+    </div>
+    <div class="extension col-12 col-md-3">
+      <label for="extensionOption">Extension</label>
+      <select id="extensionOption" name="extensionOption">
+        <option value="all">All</option>
+        <option value="Core">Core Set</option>
+        <option value="Ashes">Ashes of Outland</option>
+        <option value="Scholomance">Scholomance Academy</option>
+        <option value="Darkmoon Faire">Madness At The Darkmoon Faire</option>
+        <option value="Barrens">Forged in the Barrens</option>
+      </select>
+    </div>
+    <div class="attaque col-12 col-md-3">
+      <label for="attaqueOption">Attack</label>
+      <select id="attaqueOption" name="attaqueOption">
+        <option value="all">All</option>
+        <option value="0">Attaque: 0</option>
+        <option value="1">Attaque: 1</option>
+        <option value="2">Attaque: 2</option>
+        <option value="3">Attaque: 3</option>
+        <option value="4">Attaque: 4</option>
+        <option value="5">Attaque: 5</option>
+        <option value="6">Attaque: 6</option>
+        <option value="7">Attaque: 7</option>
+        <option value="8">Attaque: 8</option>
+        <option value="9">Attaque: 9</option>
+        <option value="10">Attaque: 10</option>
+        <option value="11">Attaque: 11</option>
+        <option value="12">Attaque: 12</option>
+      </select>
+    </div>
+    <div class="vie col-12 col-md-3">
+      <label for="vieOption">Health</label>
+      <select id="vieOption" name="vieOption">
+        <option value="all">All</option>
+        <option value="0">Health: 0</option>
+        <option value="1">Health: 1</option>
+        <option value="2">Health: 2</option>
+        <option value="3">Health: 3</option>
+        <option value="4">Health: 4</option>
+        <option value="5">Health: 5</option>
+        <option value="6">Health: 6</option>
+        <option value="7">Health: 7</option>
+        <option value="8">Health: 8</option>
+        <option value="9">Health: 9</option>
+        <option value="10">Health: 10</option>
+        <option value="11">Health: 11</option>
+        <option value="12">Health: 12</option>
+      </select>
+    </div>
+    <div class="typeCarte col-12 col-md-3">
+      <label for="typeCarteOption">Type</label>
+      <select id="typeCarteOption" name="typeCarteOption">
+        <option value="all">All</option>
+        <option value="Heros">Heros</option>
+        <option value="Minion">Minion</option>
+        <option value="Spell">Spell</option>
+        <option value="Weapon">Weapon</option>
+      </select>
+    </div>
+    <div class="race col-12 col-md-3">
+      <label for="raceOption">Race</label>
+      <select id="raceOption" name="raceOption">
+        <option value="all">All</option>
+        <option value="beast">Beast</option>
+        <option value="demon">Demon</option>
+        <option value="dragon">Dragon</option>
+        <option value="elemental">Elemental</option>
+        <option value="murloc">Murloc</option>
+        <option value="mech">Mech</option>
+        <option value="totem">Totem</option>
+        <option value="pirate">Pirate</option>
+      </select>
+    </div>
+    <div class="rarete col-12 col-md-3">
+      <label for="rareteOption">Rarity</label>
+      <select id="rareteOption" name="rareteOption">
+        <option value="all">All</option>
+        <option value="common">Common</option>
+        <option value="rare">Rare</option>
+        <option value="epic">Epic</option>
+        <option value="legendary">Legendary</option>
+      </select>
+    </div>
+    <div class="spellSchool col-12 col-md-3">
+      <label for="spellSchoolOption">Spell School</label>
+      <select id="mecaniqueOption" name="mecaniqueOption">
+        <option value="all">All</option>
+        <option value="arcane">Arcane</option>
+        <option value="fire">Fire</option>
+        <option value="shadow">Shadow</option>
+        <option value="nature">Nature</option>
+        <option value="holy">Holy</option>
+        <option value="frost">Frost</option>
+        <option value="fel">Fel</option>
+      </select>
+    </div>
+  </div>
 </template>
 
 <script>
-export default {
-  
-}
+export default {};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
