@@ -175,7 +175,7 @@ select,
   justify-content: space-evenly;
   background: #937b63;
   /* background: lightslategray; couleur carte de classe*/
-  max-height: calc(100vh - 90px);
+  height: calc(100vh - 90px);
   overflow: auto;
   padding-top: 10px;
   border-left: 5px solid #7a542e;

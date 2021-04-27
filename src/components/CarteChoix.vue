@@ -6,23 +6,16 @@
       <div class="neutre">CARTES NEUTRES</div>
     </div>
     <div class="carteAffichage">
-      <template v-for="(el,index) of tabCarte">
-        <div class="carte" :key="index">
-          <img :src="el.img" alt="">
-          <!-- <p>{{el}}</p> -->
+      <template v-for="(tabObj) of tabCarte">
+        <div class="carte" :key="ob.cardId" v-for="ob of tabObj">
+          <img :src="ob.img" alt="" />
+          <!-- <p>{{ob}}</p> -->
         </div>
       </template>
       <!-- <div class="carte"><img src="../assets/images/barjaqueur.png" alt="" /></div>
       <div class="carte indisponible"><img src="../assets/images/barjaqueur.png" alt="" /></div>
       <div class="carte"><img src="../assets/images/barjaqueur.png" alt="" /></div>
-      <div class="carte"><img src="../assets/images/barjaqueur.png" alt="" /></div>
-      <div class="carte"><img src="../assets/images/barjaqueur.png" alt="" /></div>
-      <div class="carte"><img src="../assets/images/barjaqueur.png" alt="" /></div>
-      <div class="carte"><img src="../assets/images/barjaqueur.png" alt="" /></div>
-      <div class="carte"><img src="../assets/images/barjaqueur.png" alt="" /></div>
-      <div class="carte indisponible"><img src="../assets/images/barjaqueur.png" alt="" /></div>
-      <div class="carte"><img src="../assets/images/barjaqueur.png" alt="" /></div>
-      <div class="carte"><img src="../assets/images/barjaqueur.png" alt="" /></div>
+
       <div class="carte"><img src="../assets/images/barjaqueur.png" alt="" /></div> -->
     </div>
   </div>
@@ -52,11 +45,17 @@ export default {
       })
         .then((reponse) => reponse.json())
         .then((response) => {
-          for (let i = 0; i < response.length; i++) {
-            if (response[i]["collectible"] === true) {
-              tabTest.push(response[i]);
-            }
-          }
+          let ash = response["Ashes of Outland"];
+          ash = ash.filter((x) => x["collectible"] === true);
+          let core = response["Core"];
+          core = core.filter((x) => x["collectible"] === true);
+          let sch = response["Scholomance Academy"];
+          sch = sch.filter((x) => x["collectible"] === true);
+          let mad = response["Madness At The Darkmoon Faire"];
+          mad = mad.filter((x) => x["collectible"] === true);
+          let forg = response["Forged in the Barrens"];
+          forg = forg.filter((x) => x["collectible"] === true);
+          tabTest.push(ash, core, sch, mad, forg);
         });
       return tabTest;
     },
