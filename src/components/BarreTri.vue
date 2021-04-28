@@ -3,7 +3,7 @@
   <div class="barreTri">
     <div class="mana col-12 col-md-3">
       <label for="manaOption">Mana</label>
-      <select id="manaOption" name="manaOption">
+      <select id="manaOption" name="manaOption" v-model="triCards.mana" @change="envoiTri">
         <option value="all">All</option>
         <option value="0">Mana: 0</option>
         <option value="1">Mana: 1</option>
@@ -20,9 +20,9 @@
         <option value="12">Mana: 12</option>
       </select>
     </div>
-    <div class="extension col-12 col-md-3">
-      <label for="extensionOption">Extension</label>
-      <select id="extensionOption" name="extensionOption">
+    <div class="set col-12 col-md-3">
+      <label for="setOption">Set</label>
+      <select id="setOption" name="setOption" v-model="triCards.set" @change="envoiTri">
         <option value="all">All</option>
         <option value="Core">Core Set</option>
         <option value="Ashes">Ashes of Outland</option>
@@ -33,7 +33,7 @@
     </div>
     <div class="attaque col-12 col-md-3">
       <label for="attaqueOption">Attack</label>
-      <select id="attaqueOption" name="attaqueOption">
+      <select id="attaqueOption" name="attaqueOption" v-model="triCards.attack" @change="envoiTri">
         <option value="all">All</option>
         <option value="0">Attaque: 0</option>
         <option value="1">Attaque: 1</option>
@@ -52,7 +52,7 @@
     </div>
     <div class="vie col-12 col-md-3">
       <label for="vieOption">Health</label>
-      <select id="vieOption" name="vieOption">
+      <select id="vieOption" name="vieOption" v-model="triCards.health" @change="envoiTri">
         <option value="all">All</option>
         <option value="0">Health: 0</option>
         <option value="1">Health: 1</option>
@@ -71,7 +71,7 @@
     </div>
     <div class="typeCarte col-12 col-md-3">
       <label for="typeCarteOption">Type</label>
-      <select id="typeCarteOption" name="typeCarteOption">
+      <select id="typeCarteOption" name="typeCarteOption" v-model="triCards.type" @change="envoiTri">
         <option value="all">All</option>
         <option value="Heros">Heros</option>
         <option value="Minion">Minion</option>
@@ -81,7 +81,7 @@
     </div>
     <div class="race col-12 col-md-3">
       <label for="raceOption">Race</label>
-      <select id="raceOption" name="raceOption">
+      <select id="raceOption" name="raceOption" v-model="triCards.race" @change="envoiTri">
         <option value="all">All</option>
         <option value="beast">Beast</option>
         <option value="demon">Demon</option>
@@ -95,7 +95,7 @@
     </div>
     <div class="rarete col-12 col-md-3">
       <label for="rareteOption">Rarity</label>
-      <select id="rareteOption" name="rareteOption">
+      <select id="rareteOption" name="rareteOption" v-model="triCards.rarity" @change="envoiTri">
         <option value="all">All</option>
         <option value="common">Common</option>
         <option value="rare">Rare</option>
@@ -105,7 +105,7 @@
     </div>
     <div class="spellSchool col-12 col-md-3">
       <label for="spellSchoolOption">Spell School</label>
-      <select id="mecaniqueOption" name="mecaniqueOption">
+      <select id="mecaniqueOption" name="mecaniqueOption" v-model="triCards.spell_school" @change="envoiTri">
         <option value="all">All</option>
         <option value="arcane">Arcane</option>
         <option value="fire">Fire</option>
@@ -116,11 +116,33 @@
         <option value="fel">Fel</option>
       </select>
     </div>
+    <p>Salut : {{triCards.rarity}}</p>
   </div>
 </template>
 
 <script>
-export default {};
+import {bus} from "../main"
+export default {
+  data() {
+    return {
+      triCards : {
+        mana : "all",
+        set : "all",
+        attack : "all",
+        health : "all",
+        type:"all",
+        race:"all",
+        rarity: "all",
+        spell_school : "all"
+      }
+    }
+  },
+  methods: {
+    envoiTri() {
+      bus.$emit("choixTri",this.triCards);
+    }
+  },
+};
 </script>
 
 <style scoped></style>

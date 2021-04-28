@@ -1,6 +1,7 @@
 <template>
   <!--------------------------- CARTE --------------------------->
   <div class="carteChoix col-12 col-md-8">
+    <p>{{triChoisi}} salut</p>
     <div class="choixClasseCarte">
       <div class="classeDeck">{{classeChoisie===undefined?"CLASS":formatageClasse(classeChoisie)}} CARDS</div>
       <div class="neutre">NEUTRAL CARDS</div>
@@ -27,14 +28,21 @@ export default {
   data() {
     return {
       tabCarte: undefined,
-      classeChoisie : undefined
+      classeChoisie : undefined,
+      triChoisi : undefined
     };
   },
   created() {
+    //On donne à tabCarte la liste des cartes standard
     this.tabCarte = this.fetchTest();
+    //On donne à classeChoisie la classe choisie dans le composant choixPerso
     bus.$on("choixClasse",(data) => {
       this.classeChoisie = data;
+    }),
+    bus.$on("choixTri",(data)=> {
+      this.triChoisi = data
     })
+
   },
   methods: {
     fetchTest() {
