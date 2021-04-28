@@ -2,8 +2,8 @@
   <!--------------------------- CARTE --------------------------->
   <div class="carteChoix col-12 col-md-8">
     <div class="choixClasseCarte">
-      <div class="classeDeck">CARTES CHAMAN</div>
-      <div class="neutre">CARTES NEUTRES</div>
+      <div class="classeDeck">{{classeChoisie===undefined?"CLASS":formatageClasse(classeChoisie)}} CARDS</div>
+      <div class="neutre">NEUTRAL CARDS</div>
     </div>
     <div class="carteAffichage">
       <template v-for="tabObj of tabCarte">
@@ -22,16 +22,19 @@
 </template>
 
 <script>
+import {bus} from "../main"
 export default {
   data() {
     return {
       tabCarte: undefined,
+      classeChoisie : undefined
     };
   },
   created() {
     this.tabCarte = this.fetchTest();
-    console.log(this.tabCarte);
-    console.log("salut");
+    bus.$on("choixClasse",(data) => {
+      this.classeChoisie = data;
+    })
   },
   methods: {
     fetchTest() {
@@ -59,6 +62,9 @@ export default {
         });
       return tabTest;
     },
+    formatageClasse(classe) {
+      return classe.replace("_"," ").toUpperCase();
+    }
   },
 };
 </script>

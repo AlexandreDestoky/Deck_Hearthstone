@@ -69,6 +69,7 @@ select,
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  user-select: none;
 }
 
 .classeHS > img {
@@ -77,6 +78,7 @@ select,
   border: 4px solid black;
   margin: 5px;
   opacity: 0.3;
+  -webkit-user-drag: none;
 }
 
 .classeHS > img:hover {
