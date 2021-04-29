@@ -39,7 +39,7 @@ export default {
     });
   },
   methods: {
-    fetchTest(classe, tri) {
+    fetchTest(classe, tris) {
       let tabTest = [];
       fetch(`https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/classes/${classe}?collectible=1`, {
         method: "GET",
@@ -50,20 +50,27 @@ export default {
       })
         .then((reponse) => reponse.json())
         .then((response) => {
-               if(tri !== undefined) {
-                console.log(tri);
-              }
           for (let el of response) {
             //On test si la carte est dans un des formats du standard
             if (
-              el.cardSet === "Core" ||
-              el.cardSet === "Ashes of Outland" ||
-              el.cardSet === "Scholomance Academy" ||
-              el.cardSet === "Madness At The Darkmoon Faire" ||
+              // el.cardSet === "Core" ||
+              // el.cardSet === "Ashes of Outland" ||
+              // el.cardSet === "Scholomance Academy" ||
+              // el.cardSet === "Madness At The Darkmoon Faire" ||
               el.cardSet === "Forged in the Barrens"
             ) {
               tabTest.push(el);
-              // console.log(el);
+              //Si le tri existe
+              if(tris !== undefined) {
+                for(let tri in tris) {
+
+                  if(el[tri] !== undefined) {
+                    console.log(el[tri] + " " + tri);
+                    console.log(tris[tri]);
+                    console.log("-----------------");
+                  }
+                }
+              }
             }
           }
         });
