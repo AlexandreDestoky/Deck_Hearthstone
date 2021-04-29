@@ -6,12 +6,11 @@
       <div class="classeDeck">{{ classeChoisie === undefined ? "CLASS" : formatageClasse(classeChoisie) }} CARDS</div>
       <div class="neutre">NEUTRAL CARDS</div>
     </div>
-    <p>salut : {{tabCarte.length}}</p>
     <div class="carteAffichage">
       <div class="carte" v-for="tabObj of tabCarte" :key="tabObj.cardId">
-          <img :src="tabObj.img" alt=""/>
+        <img :src="tabObj.img" :alt="tabObj.name" />
       </div>
-     <!-- <div class="carte"><img src="../assets/images/barjaqueur.png" alt="" /></div> -->
+      <!-- <div class="carte"><img src="../assets/images/barjaqueur.png" alt="" /></div> -->
     </div>
   </div>
 </template>
@@ -21,9 +20,10 @@ import { bus } from "../main";
 export default {
   data() {
     return {
-      tabCarte: undefined,
       classeChoisie: undefined,
       triChoisi: undefined,
+      tabCarte: undefined,
+      tabCarteClasse: undefined,
     };
   },
   created() {
@@ -32,13 +32,14 @@ export default {
     //On donne à classeChoisie la classe choisie dans le composant choixPerso
     bus.$on("choixClasse", (data) => {
       this.classeChoisie = data;
-    }),
-      bus.$on("choixTri", (data) => {
-        this.triChoisi = data;
-      });
+    });
+    bus.$on("choixTri", (data) => {
+      this.triChoisi = data;
+      this.tabCarte = this.fetchTest("NEUTRAL",this.triChoisi);
+    });
   },
   methods: {
-    fetchTest(classe) {
+    fetchTest(classe, tri) {
       let tabTest = [];
       fetch(`https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/classes/${classe}?collectible=1`, {
         method: "GET",
@@ -49,20 +50,20 @@ export default {
       })
         .then((reponse) => reponse.json())
         .then((response) => {
-          // let core = response["Core"];
-          // core = core.filter((x) => x["collectible"] === true);
-          // let ash = response["Ashes of Outland"];
-          // ash = ash.filter((x) => x["collectible"] === true);
-          // let sch = response["Scholomance Academy"];
-          // sch = sch.filter((x) => x["collectible"] === true);
-          // let mad = response["Madness At The Darkmoon Faire"];
-          // mad = mad.filter((x) => x["collectible"] === true);
-          // let forg = response["Forged in the Barrens"];
-          // forg = forg.filter((x) => x["collectible"] === true);
-          // tabTest.push(core, ash, sch, mad, forg);
+               if(tri !== undefined) {
+                console.log(tri);
+              }
           for (let el of response) {
-            if (el.cardSet === "Core" || el.cardSet === "Forged in the Barrens") {
+            //On test si la carte est dans un des formats du standard
+            if (
+              el.cardSet === "Core" ||
+              el.cardSet === "Ashes of Outland" ||
+              el.cardSet === "Scholomance Academy" ||
+              el.cardSet === "Madness At The Darkmoon Faire" ||
+              el.cardSet === "Forged in the Barrens"
+            ) {
               tabTest.push(el);
+              // console.log(el);
             }
           }
         });

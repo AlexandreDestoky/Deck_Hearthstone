@@ -3,7 +3,7 @@
   <div class="barreTri">
     <div class="mana col-12 col-md-3">
       <label for="manaOption">Mana</label>
-      <select id="manaOption" name="manaOption" v-model="triCards.mana" @change="envoiTri">
+      <select id="manaOption" name="manaOption" v-model="triCards.cost" @change="envoiTri">
         <option value="all">All</option>
         <option value="0">Mana: 0</option>
         <option value="1">Mana: 1</option>
@@ -126,7 +126,7 @@ export default {
   data() {
     return {
       triCards : {
-        mana : "all",
+        cost : "all",
         set : "all",
         attack : "all",
         health : "all",
