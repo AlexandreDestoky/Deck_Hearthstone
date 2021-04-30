@@ -7,10 +7,17 @@
       <div class="neutre" @click="affichageClasse = false">NEUTRAL CARDS</div>
     </div>
     <div class="carteAffichage">
-      <h1 v-if="classeChoisie === undefined"> Veuillez choisir une classe</h1>
-      <div class="carte" v-for="tabObj of affichageClasse?tabCarteClasse:tabCarte" :key="tabObj.cardId">
-        <img :src="tabObj.img" :alt="tabObj.name" />
-      </div>
+      <template v-if="affichageClasse">
+        <h1 v-if="classeChoisie === undefined"> Veuillez choisir une classe</h1>
+        <div class="carte" v-for="tabObj of tabCarteClasse" :key="tabObj.cardId">
+          <img :src="tabObj.img" :alt="tabObj.name" />
+        </div>
+      </template>
+      <template v-else>
+        <div class="carte" v-for="tabObj of tabCarte" :key="tabObj.cardId">
+          <img :src="tabObj.img" :alt="tabObj.name" />
+        </div>
+      </template>
       <!-- <div class="carte"><img src="../assets/images/barjaqueur.png" alt="" /></div> -->
     </div>
   </div>

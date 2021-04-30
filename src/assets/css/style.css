@@ -160,32 +160,33 @@ select,
   border-radius: 0 10px 0 0;
 }
 
-/* .neutre:hover {
+.neutre:hover {
   background:#382615;
-} */
+}
 
 .choixClasseCarte {
   display: flex;
-  /* height: 50px; */
   width: 100%;
 }
 
 /* LISTE DES CARTES */
 .carteAffichage {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fill,200px);
+  justify-content: space-around;
   background: #937b63;
   /* background: lightslategray; couleur carte de classe*/
   height: calc(100vh - 90px);
   overflow: auto;
-  padding-top: 10px;
+  padding-bottom: 50px;
   border-left: 5px solid #7a542e;
   border: 5px solid #7a542e;
   padding-bottom: 30px;
 }
+/* Smartphone affichage horizontal */
 @media (max-width: 767.98px) {
   .carteAffichage {
+    display: flex;
     flex-wrap: nowrap;
     justify-content: flex-start;
     padding-left: 10%;
