@@ -190,7 +190,7 @@ select,
     flex-wrap: nowrap;
     justify-content: flex-start;
     padding-left: 10%;
-    height:auto;
+    height:50vh;
   }
  }
 

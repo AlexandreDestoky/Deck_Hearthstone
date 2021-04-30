@@ -22,13 +22,13 @@
     </div>
     <div class="set col-12 col-md-3">
       <label for="setOption">Set</label>
-      <select id="setOption" name="setOption" v-model="triCards.set" @change="envoiTri">
+      <select id="setOption" name="setOption" v-model="triCards.cardSet" @change="envoiTri">
         <option value="all">All</option>
         <option value="Core">Core Set</option>
-        <option value="Ashes">Ashes of Outland</option>
-        <option value="Scholomance">Scholomance Academy</option>
-        <option value="Darkmoon Faire">Madness At The Darkmoon Faire</option>
-        <option value="Barrens">Forged in the Barrens</option>
+        <option value="Ashes of Outland">Ashes of Outland</option>
+        <option value="Scholomance Academy">Scholomance Academy</option>
+        <option value="Madness At The Darkmoon Faire">Madness At The Darkmoon Faire</option>
+        <option value="Forged in the Barrens">Forged in the Barrens</option>
       </select>
     </div>
     <div class="attaque col-12 col-md-3">
@@ -83,37 +83,37 @@
       <label for="raceOption">Race</label>
       <select id="raceOption" name="raceOption" v-model="triCards.race" @change="envoiTri">
         <option value="all">All</option>
-        <option value="beast">Beast</option>
-        <option value="demon">Demon</option>
-        <option value="dragon">Dragon</option>
-        <option value="elemental">Elemental</option>
-        <option value="murloc">Murloc</option>
-        <option value="mech">Mech</option>
-        <option value="totem">Totem</option>
-        <option value="pirate">Pirate</option>
+        <option value="Beast">Beast</option>
+        <option value="Demon">Demon</option>
+        <option value="Dragon">Dragon</option>
+        <option value="Elemental">Elemental</option>
+        <option value="Murloc">Murloc</option>
+        <option value="Mech">Mech</option>
+        <option value="Totem">Totem</option>
+        <option value="Pirate">Pirate</option>
       </select>
     </div>
     <div class="rarete col-12 col-md-3">
       <label for="rareteOption">Rarity</label>
       <select id="rareteOption" name="rareteOption" v-model="triCards.rarity" @change="envoiTri">
         <option value="all">All</option>
-        <option value="common">Common</option>
-        <option value="rare">Rare</option>
-        <option value="epic">Epic</option>
-        <option value="legendary">Legendary</option>
+        <option value="Common">Common</option>
+        <option value="Rare">Rare</option>
+        <option value="Epic">Epic</option>
+        <option value="Legendary">Legendary</option>
       </select>
     </div>
     <div class="spellSchool col-12 col-md-3">
       <label for="spellSchoolOption">Spell School</label>
-      <select id="mecaniqueOption" name="mecaniqueOption" v-model="triCards.spell_school" @change="envoiTri">
+      <select id="mecaniqueOption" name="mecaniqueOption" v-model="triCards.spellSchool" @change="envoiTri">
         <option value="all">All</option>
-        <option value="arcane">Arcane</option>
-        <option value="fire">Fire</option>
-        <option value="shadow">Shadow</option>
-        <option value="nature">Nature</option>
-        <option value="holy">Holy</option>
-        <option value="frost">Frost</option>
-        <option value="fel">Fel</option>
+        <option value="Arcane">Arcane</option>
+        <option value="Fire">Fire</option>
+        <option value="Shadow">Shadow</option>
+        <option value="Nature">Nature</option>
+        <option value="Holy">Holy</option>
+        <option value="Frost">Frost</option>
+        <option value="Fel">Fel</option>
       </select>
     </div>
     <p>Salut : {{triCards.rarity}}</p>
@@ -127,13 +127,13 @@ export default {
     return {
       triCards : {
         cost : "all",
-        set : "all",
+        cardSet : "all",
         attack : "all",
         health : "all",
         type:"all",
         race:"all",
         rarity: "all",
-        spell_school : "all"
+        spellSchool : "all"
       }
     }
   },
