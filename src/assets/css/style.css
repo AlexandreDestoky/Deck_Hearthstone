@@ -171,9 +171,9 @@ select,
 
 /* LISTE DES CARTES */
 .carteAffichage {
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(auto-fill,200px);
-  justify-content: space-around;
+  justify-content: space-around; */
   background: #937b63;
   /* background: lightslategray; couleur carte de classe*/
   height: calc(100vh - 90px);
@@ -183,14 +183,25 @@ select,
   border: 5px solid #7a542e;
   padding-bottom: 30px;
 }
+
+.boxCard {
+  width:95%;
+  margin:auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill,200px);
+  justify-content: space-around;
+}
+
 /* Smartphone affichage horizontal */
 @media (max-width: 767.98px) {
   .carteAffichage {
+    height:50vh;
+  }
+  .boxCard {
     display: flex;
     flex-wrap: nowrap;
     justify-content: flex-start;
     padding-left: 10%;
-    height:50vh;
   }
  }
 

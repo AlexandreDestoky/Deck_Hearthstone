@@ -1,24 +1,26 @@
 <template>
   <!--------------------------- CARTE --------------------------->
   <div class="carteChoix col-12 col-md-8">
-    <p>{{affichageClasse}}</p>
     <div class="choixClasseCarte">
-      <div class="classeDeck" @click="affichageClasse = true">{{ classeChoisie === undefined ? "CLASS" : formatageClasse(classeChoisie) }} CARDS</div>
+      <div class="classeDeck" @click="affichageClasse = true">
+        {{ classeChoisie === undefined ? "CLASS" : formatageClasse(classeChoisie) }} CARDS
+      </div>
       <div class="neutre" @click="affichageClasse = false">NEUTRAL CARDS</div>
     </div>
     <div class="carteAffichage">
-      <template v-if="affichageClasse">
-        <h1 v-if="classeChoisie === undefined"> Veuillez choisir une classe</h1>
-        <div class="carte" v-for="tabObj of tabCarteClasse" :key="tabObj.cardId">
-          <img :src="tabObj.img" :alt="tabObj.name" />
-        </div>
-      </template>
-      <template v-else>
-        <div class="carte" v-for="tabObj of tabCarte" :key="tabObj.cardId">
-          <img :src="tabObj.img" :alt="tabObj.name" />
-        </div>
-      </template>
-      <!-- <div class="carte"><img src="../assets/images/barjaqueur.png" alt="" /></div> -->
+      <h1 v-if="classeChoisie === undefined && affichageClasse">Veuillez choisir une classe</h1>
+      <div class="boxCard">
+        <template v-if="affichageClasse">
+          <div class="carte" v-for="tabObj of tabCarteClasse" :key="tabObj.cardId">
+            <img :src="tabObj.img" :alt="tabObj.name" />
+          </div>
+        </template>
+        <template v-else>
+          <div class="carte" v-for="tabObj of tabCarte" :key="tabObj.cardId">
+            <img :src="tabObj.img" :alt="tabObj.name" />
+          </div>
+        </template>
+      </div>
     </div>
   </div>
 </template>
@@ -32,7 +34,7 @@ export default {
       triChoisi: undefined,
       tabCarte: undefined,
       tabCarteClasse: undefined,
-      affichageClasse : true
+      affichageClasse: true,
     };
   },
   created() {
@@ -46,7 +48,7 @@ export default {
     bus.$on("choixTri", (data) => {
       this.triChoisi = data;
       this.tabCarte = this.fetchTest("NEUTRAL", this.triChoisi);
-      if(this.classeChoisie) this.tabCarteClasse = this.fetchTest(this.classeChoisie,this.triChoisi);
+      if (this.classeChoisie) this.tabCarteClasse = this.fetchTest(this.classeChoisie, this.triChoisi);
     });
   },
   methods: {
@@ -84,7 +86,7 @@ export default {
                 }
                 //SSI tout les critères sont OK, on ajoute la carte au tableau
                 if (toutCritere === true) tabTest.push(carte);
-              //Si il n'y a pas de tri, on ajoute toutes les cartes standard
+                //Si il n'y a pas de tri, on ajoute toutes les cartes standard
               } else {
                 tabTest.push(carte);
               }
