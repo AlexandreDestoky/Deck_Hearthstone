@@ -134,12 +134,11 @@ select,
 /* HEADER LISTE CARTE : CHOIX CARTE CLASSE OU NEUTRE */
 .classeDeck,
 .neutre {
-  height: 50px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: space-around;
   width: 50%;
-  height: 50px;
   font-family: "Rubik", sans-serif;
   font-weight: bold;
   padding:.4em;
@@ -167,7 +166,7 @@ select,
 
 .choixClasseCarte {
   display: flex;
-  height: 50px;
+  /* height: 50px; */
   width: 100%;
 }
 
@@ -218,7 +217,7 @@ select,
 
 /* HEADER DECK*/
 .classeCard {
-  height: 50px;
+  height: 70px;
   display: flex;
   background: firebrick;
   align-items: center;

@@ -35,12 +35,12 @@ export default {
     });
     bus.$on("choixTri", (data) => {
       this.triChoisi = data;
-      this.tabCarte = this.fetchTest("NEUTRAL",this.triChoisi);
+      this.tabCarte = this.fetchTest("NEUTRAL", this.triChoisi);
     });
   },
   methods: {
     fetchTest(classe, tris) {
-      let tabTest = [];
+      let tabTest = []; //le tableau qui va contenir toutes les cartes
       fetch(`https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/classes/${classe}?collectible=1`, {
         method: "GET",
         headers: {
@@ -50,34 +50,32 @@ export default {
       })
         .then((reponse) => reponse.json())
         .then((response) => {
-          for (let el of response) {
+          for (let carte of response) {
+            let toutCritere = true; //de base tout les critères sont remplis
+
             //On test si la carte est dans un des formats du standard
             if (
-              // el.cardSet === "Core" ||
-              // el.cardSet === "Ashes of Outland" ||
-              // el.cardSet === "Scholomance Academy" ||
-              // el.cardSet === "Madness At The Darkmoon Faire" ||
-              el.cardSet === "Forged in the Barrens"
+              carte.cardSet === "Core" ||
+              carte.cardSet === "Ashes of Outland" ||
+              carte.cardSet === "Scholomance Academy" ||
+              carte.cardSet === "Madness At The Darkmoon Faire" ||
+              carte.cardSet === "Forged in the Barrens"
             ) {
-              // tabTest.push(el);
               //Si il y a un tri
-              if(tris !== undefined) {
+              if (tris != undefined) {
                 //Pour chaque tri (attaque,cout..)
-                for(let tri in tris) {
+                for (let tri in tris) {
                   //Si le tri est différent de all (car si c'est all il n'y a pas de tri qui s'applique)
-                  if(tris[tri] !== "all") {
-                    //On regarde si la carte à un élément de se nom (la carte à t'elle un élément "spell_school" par exemple ?)
-                    if(el[tri] !== undefined) {
-                      // console.log((el[tri]).toUpperCase() + " " + tri);
-                      // console.log((tris[tri]).toUpperCase());
-                      // console.log("-----------------");
-                      if(el[tri]  === tris[tri]) {
-                        tabTest.push(el);
-                      }
-
-                    }
+                  if (tris[tri] != "all") {
+                    //SI la valeur du tri est différente de la valeur de la carte, tout les critère ne sont pas rempli
+                    if (carte[tri] != tris[tri]) toutCritere = false;
                   }
                 }
+                //SSI tout les critères sont OK, on ajoute la carte au tableau
+                if (toutCritere === true) tabTest.push(carte);
+              //Si il n'y a pas de tri, on ajoute toutes les cartes standard
+              } else {
+                tabTest.push(carte);
               }
             }
           }
