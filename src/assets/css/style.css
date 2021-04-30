@@ -174,7 +174,7 @@ select,
 .carteAffichage {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-between;
   background: #937b63;
   /* background: lightslategray; couleur carte de classe*/
   height: calc(100vh - 90px);
