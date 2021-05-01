@@ -116,7 +116,6 @@
         <option value="Fel">Fel</option>
       </select>
     </div>
-    <p>Salut : {{triCards.rarity}}</p>
   </div>
 </template>
 

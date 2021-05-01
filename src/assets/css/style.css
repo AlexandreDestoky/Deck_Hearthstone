@@ -52,7 +52,8 @@ h1 {
 
 .carteChoix ::-webkit-scrollbar-thumb {
   border-radius: 0;
-  background: #543926;
+  /* background: #543926; */
+  background: rgb(39, 37, 37);
 }
 
 /* POINTEUR CURSEUR  */
@@ -171,18 +172,24 @@ select,
 
 /* LISTE DES CARTES */
 .carteAffichage {
-  /* display: grid;
-  grid-template-columns: repeat(auto-fill,200px);
-  justify-content: space-around; */
-  background: #937b63;
   /* background: lightslategray; couleur carte de classe*/
   height: calc(100vh - 90px);
   overflow: auto;
   padding-bottom: 50px;
-  border-left: 5px solid #7a542e;
-  border: 5px solid #7a542e;
-  padding-bottom: 30px;
 }
+.couleurNeutre {
+  background: #937b63;
+  border: 5px solid #7a542e;
+}
+
+.couleurClasse {
+  background: lightslategray;
+  border: 5px solid #3d5a80;
+}
+
+
+
+
 
 .boxCard {
   width:95%;
