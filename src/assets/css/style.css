@@ -209,6 +209,7 @@ select,
     flex-wrap: nowrap;
     justify-content: flex-start;
     padding-left: 10%;
+    height: 200px;
   }
  }
 
