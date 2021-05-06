@@ -6,13 +6,26 @@
       <p>0/30</p>
     </div>
     <div class="deckListe">
-      
+      <p>Salut</p>
+      <p>{{test}}</p>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import { bus } from "../main";
+export default {
+  data() {
+    return {
+      test : undefined
+    }
+  },
+  created() {
+    bus.$on("choixCarte",(data)=> {
+      this.test = data.name;
+    })
+  }
+};
 </script>
 
 <style scoped></style>

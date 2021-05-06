@@ -7,17 +7,19 @@
       </div>
       <div class="neutre" @click="affichageClasse = false">NEUTRAL CARDS</div>
     </div>
-    <div class="carteAffichage" :class="{couleurClasse:affichageClasse,couleurNeutre:!affichageClasse}">
+    <div class="carteAffichage" :class="{ couleurClasse: affichageClasse, couleurNeutre: !affichageClasse }">
       <h1 v-if="classeChoisie === undefined && affichageClasse">Veuillez choisir une classe</h1>
       <div class="boxCard">
+        <!-- Affichage carte de classes -->
         <template v-if="affichageClasse">
           <div class="carte" v-for="tabObj of tabCarteClasse" :key="tabObj.cardId">
-            <img :src="tabObj.img" :alt="tabObj.name" />
+            <img :src="tabObj.img" :alt="tabObj.name" @click="envoiCarte(tabObj)"/>
           </div>
         </template>
+        <!-- Affichage carte neutre -->
         <template v-else>
           <div class="carte" v-for="tabObj of tabCarte" :key="tabObj.cardId">
-            <img :src="tabObj.img" :alt="tabObj.name" />
+            <img :src="tabObj.img" :alt="tabObj.name" @click="envoiCarte(tabObj)"/>
           </div>
         </template>
       </div>
@@ -35,8 +37,8 @@ export default {
       tabCarte: undefined,
       tabCarteClasse: undefined,
       affichageClasse: true,
-      couleurClasse : true,
-      couleurNeutre : false
+      couleurClasse: true,
+      couleurNeutre: false,
     };
   },
   created() {
@@ -100,6 +102,9 @@ export default {
     formatageClasse(classe) {
       return classe.replace("_", " ").toUpperCase();
     },
+    envoiCarte(carte) {
+      bus.$emit("choixCarte",carte);
+    }
   },
 };
 </script>
