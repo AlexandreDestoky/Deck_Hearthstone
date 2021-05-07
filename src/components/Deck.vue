@@ -7,7 +7,7 @@
     </div>
     <div class="deckListe">
       <p>Salut</p>
-      <p>{{test}}</p>
+      <p>{{test.name + test.id}} </p>
     </div>
   </div>
 </template>
@@ -22,7 +22,7 @@ export default {
   },
   created() {
     bus.$on("choixCarte",(data)=> {
-      this.test = data.name;
+      this.test = data;
     })
   }
 };
