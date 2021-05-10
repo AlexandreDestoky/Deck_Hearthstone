@@ -7,7 +7,7 @@
     </div>
     <div class="deckListe">
       <p>Salut</p>
-      <p>{{test.name + test.id}} </p>
+      <p>{{test}} </p>
     </div>
   </div>
 </template>
