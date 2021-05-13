@@ -6,8 +6,11 @@
       <p>0/30</p>
     </div>
     <div class="deckListe">
-      <p>Salut</p>
-      <p>{{test}} </p>
+      <div class="carteListe" v-for="el of deckList" :key="el.name">
+        <p class="coutMana">{{el.cost}}</p>
+        <p class="nom">{{el.name}}</p>
+        <p class="nbrExemplaire">X1</p>
+      </div>
     </div>
   </div>
 </template>
@@ -17,14 +20,14 @@ import { bus } from "../main";
 export default {
   data() {
     return {
-      test : undefined
-    }
+      deckList: [],
+    };
   },
   created() {
-    bus.$on("choixCarte",(data)=> {
-      this.test = data;
-    })
-  }
+    bus.$on("choixCarte", (data) => {
+      this.deckList.push(data);
+    });
+  },
 };
 </script>
 
