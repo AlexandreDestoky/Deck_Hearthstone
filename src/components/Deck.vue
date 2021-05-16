@@ -26,6 +26,9 @@ export default {
   },
   created() {
     bus.$on("choixCarte", (data) => {
+      if(data.copy === 1) {
+        this.update(data.name,[data]);
+      }
       data.copy = 1; //un exemplaire
       this.alreadyInDeck(data.name,[data])
     });
@@ -33,6 +36,11 @@ export default {
   methods: {
     allowDrop(ev) {
       ev.preventDefault();
+    },
+    update(nomdeCarte,[carteApusher]) {
+      let indexTest = this.deckList.findIndex((obj) => obj.name === nomdeCarte);
+      if(indexTest != -1)this.$set(this.deckList[indexTest],"cost", this.deckList[indexTest].cost++);
+      console.log(carteApusher);
     },
     drop(ev) {
       ev.preventDefault();
