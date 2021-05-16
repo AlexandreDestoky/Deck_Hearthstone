@@ -1,6 +1,7 @@
 <template>
   <!--------------------------- CARTE --------------------------->
   <div class="carteChoix col-12 col-md-8">
+    <!-- Affichage classes de carte-->
     <div class="choixClasseCarte">
       <div class="classeDeck" @click="affichageClasse = true">
         {{ classeChoisie === undefined ? "CLASS" : formatageClasse(classeChoisie) }} CARDS
@@ -13,13 +14,13 @@
         <!-- Affichage carte de classes -->
         <template v-if="affichageClasse">
           <div class="carte" v-for="tabObj of tabCarteClasse" :key="tabObj.cardId">
-            <img :src="tabObj.img" :alt="tabObj.name" @click="envoiCarte(tabObj)"/>
+            <img :src="tabObj.img" :alt="tabObj.name" @click="envoiCarte(tabObj)" />
           </div>
         </template>
         <!-- Affichage carte neutre -->
         <template v-else>
           <div class="carte" v-for="tabObj of tabCarte" :key="tabObj.cardId">
-            <img :src="tabObj.img" :alt="tabObj.name" @click="envoiCarte(tabObj)"/>
+            <img :src="tabObj.img" :alt="tabObj.name" @click="envoiCarte(tabObj)" draggable="true" @dragstart="drag" :id="tabObj.cardId"/>
           </div>
         </template>
       </div>
@@ -103,8 +104,13 @@ export default {
       return classe.replace("_", " ").toUpperCase();
     },
     envoiCarte(carte) {
-      bus.$emit("choixCarte",carte);
-    }
+      bus.$emit("choixCarte", carte);
+    },
+    drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+      // ev.dataTransfer.setData("text",test);
+      // console.log(test);
+    },
   },
 };
 </script>
