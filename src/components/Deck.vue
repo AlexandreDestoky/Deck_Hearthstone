@@ -36,10 +36,11 @@ export default {
     drop(ev) {
       ev.preventDefault();
       let data = ev.dataTransfer.getData("text");
-      var nodeCopy = document.getElementById(data).cloneNode(true);
-      nodeCopy.id = "newId";
-      console.log(nodeCopy);
-      ev.target.appendChild(nodeCopy);
+      console.log(data);
+      // var nodeCopy = document.getElementById(data).cloneNode(true);
+      // nodeCopy.id = "newId";
+      // console.log(nodeCopy);
+      // ev.target.appendChild(nodeCopy);
     },
   },
 };

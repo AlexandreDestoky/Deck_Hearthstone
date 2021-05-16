@@ -20,7 +20,7 @@
         <!-- Affichage carte neutre -->
         <template v-else>
           <div class="carte" v-for="tabObj of tabCarte" :key="tabObj.cardId">
-            <img :src="tabObj.img" :alt="tabObj.name" @click="envoiCarte(tabObj)" draggable="true" @dragstart="drag" :id="tabObj.cardId"/>
+            <img :src="tabObj.img" :alt="tabObj.name" @click="envoiCarte(tabObj)" draggable="true" @dragstart="drag" :id="tabObj.cardId" :data-carte="[tabObj.cost,tabObj.name]"/>
           </div>
         </template>
       </div>
@@ -107,7 +107,8 @@ export default {
       bus.$emit("choixCarte", carte);
     },
     drag(ev) {
-      ev.dataTransfer.setData("text", ev.target.id);
+      ev.dataTransfer.setData("text", ev.target.dataset.carte);
+      // console.log(ev.target.dataset.carte);
       // ev.dataTransfer.setData("text",test);
       // console.log(test);
     },
