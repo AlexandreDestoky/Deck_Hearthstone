@@ -14,7 +14,7 @@
         <!-- Affichage carte de classes -->
         <template v-if="affichageClasse">
           <div class="carte" v-for="tabObj of tabCarteClasse" :key="tabObj.cardId">
-            <img :src="tabObj.img" :alt="tabObj.name" @click="envoiCarte(tabObj)" />
+            <img :src="tabObj.img" :alt="tabObj.name" @click="envoiCarte(tabObj)" draggable="true" @dragstart="drag" :id="tabObj.cardId" :data-carte-nom="tabObj.name" :data-carte-cout="tabObj.cost" />
           </div>
         </template>
         <!-- Affichage carte neutre -->
@@ -109,10 +109,6 @@ export default {
     drag(ev) {
       ev.dataTransfer.setData("nom", ev.target.dataset.carteNom);
       ev.dataTransfer.setData("cout", ev.target.dataset.carteCout);
-
-      // console.log(ev.target.dataset.carteNom);
-      // ev.dataTransfer.setData("text",test);
-      // console.log(test);
     },
   },
 };
