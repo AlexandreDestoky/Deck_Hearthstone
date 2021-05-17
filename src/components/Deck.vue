@@ -3,7 +3,7 @@
   <div class="deck col-12 col-md-4">
     <div class="classeCard">
       <p>DECK CHAMAN</p>
-      <p>0/30</p>
+      <p>{{nbrCarte}}/30</p>
     </div>
     <div class="deckListe" @drop="drop" @dragover="allowDrop">
       <div class="carteListe" v-for="el of deckList" :key="el.name">
@@ -22,6 +22,7 @@ export default {
   data() {
     return {
       deckList: [],
+      nbrCarte : 0
     };
   },
   created() {
@@ -42,6 +43,7 @@ export default {
       this.alreadyInDeck(nomCarte,[{ name: nomCarte, cost: coutCarte, copy: 1 }])
     },
     alreadyInDeck(nomdeCarte,[carteApusher]) {
+      this.nbrCarte++;
       //Si l'a carte n'est pas dans la liste du deck, on l'ajoute, sinon on met la copie à 1
       let indexTest = this.deckList.findIndex((obj) => obj.name === nomdeCarte);
       if (indexTest === -1) {
