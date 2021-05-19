@@ -224,7 +224,7 @@ select,
 /* Si plus d'exmplaire pour carte */
 .indisponible {
   opacity: 0.3;
-  cursor: not-allowed;
+  pointer-events: none;
 }
 
 
