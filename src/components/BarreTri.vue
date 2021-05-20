@@ -137,8 +137,11 @@ export default {
     }
   },
   methods: {
+    /**
+     * envoi l'événement "choixtri" avec comme donné le tri de carte
+     */
     envoiTri() {
-      bus.$emit("choixTri",this.triCards);
+      bus.$emit("choixTri",this.triCards); 
     }
   },
 };
