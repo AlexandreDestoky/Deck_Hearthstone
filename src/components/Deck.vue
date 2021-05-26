@@ -44,29 +44,17 @@ export default {
       this.alreadyInDeck(nomCarte, [{ name: nomCarte, cost: coutCarte, rarity: rareteCarte, copy: 1 }]);
     },
     alreadyInDeck(nomdeCarte, [carteApusher]) {
+      this.nbrCarte++;
       //Si la carte n'est pas légendaire ...
-      if(carteApusher.rarity != "Legendary") {
-
-
-        this.nbrCarte++;
-        let indexTest = this.deckList.findIndex((obj) => obj.name === nomdeCarte);
-        //Si l'a carte n'est pas dans la liste du deck, on l'ajoute, sinon on met la copie à 1
-        if (indexTest === -1) {
-          this.deckList.push(carteApusher);
-        } else {
-          this.deckList[indexTest].copy = 2;
-          //on envoi le nom de la carte qui n'est plus dispo
-          this.envoiCartePlusDispo(this.deckList[indexTest].name);
-        }
+      let indexTest = this.deckList.findIndex((obj) => obj.name === nomdeCarte);
+      //Si l'a carte n'est pas dans la liste du deck, on l'ajoute, sinon on met la copie à 1
+      if (indexTest === -1) {
+        this.deckList.push(carteApusher);
+        if (carteApusher.rarity === "Legendary") this.envoiCartePlusDispo(carteApusher.name);
       } else {
-        //si la carte est légendaire
-        let indexTest = this.deckList.findIndex((obj) => obj.name === nomdeCarte);
-        if (indexTest === -1) {
-          this.deckList.push(carteApusher);
-          this.envoiCartePlusDispo(carteApusher.name);
-          // console.log(this.deckList);
-        }
-
+        this.deckList[indexTest].copy = 2;
+        //on envoi le nom de la carte qui n'est plus dispo
+        this.envoiCartePlusDispo(this.deckList[indexTest].name);
       }
     },
     removeCard(e) {
