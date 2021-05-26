@@ -40,18 +40,33 @@ export default {
       //Nom et cout viennent du dataset de CarteChoix
       let coutCarte = ev.dataTransfer.getData("cout");
       let nomCarte = ev.dataTransfer.getData("nom");
-      this.alreadyInDeck(nomCarte, [{ name: nomCarte, cost: coutCarte, copy: 1 }]);
+      let rareteCarte = ev.dataTransfer.getData("rarete");
+      this.alreadyInDeck(nomCarte, [{ name: nomCarte, cost: coutCarte, rarity: rareteCarte, copy: 1 }]);
     },
     alreadyInDeck(nomdeCarte, [carteApusher]) {
-      this.nbrCarte++;
-      //Si l'a carte n'est pas dans la liste du deck, on l'ajoute, sinon on met la copie à 1
-      let indexTest = this.deckList.findIndex((obj) => obj.name === nomdeCarte);
-      if (indexTest === -1) {
-        this.deckList.push(carteApusher);
+      //Si la carte n'est pas légendaire ...
+      if(carteApusher.rarity != "Legendary") {
+
+
+        this.nbrCarte++;
+        let indexTest = this.deckList.findIndex((obj) => obj.name === nomdeCarte);
+        //Si l'a carte n'est pas dans la liste du deck, on l'ajoute, sinon on met la copie à 1
+        if (indexTest === -1) {
+          this.deckList.push(carteApusher);
+        } else {
+          this.deckList[indexTest].copy = 2;
+          //on envoi le nom de la carte qui n'est plus dispo
+          this.envoiCartePlusDispo(this.deckList[indexTest].name);
+        }
       } else {
-        this.deckList[indexTest].copy = 2;
-        //on envoi le nom de la carte qui n'est plus dispo
-        this.envoiCartePlusDispo(this.deckList[indexTest].name);
+        //si la carte est légendaire
+        let indexTest = this.deckList.findIndex((obj) => obj.name === nomdeCarte);
+        if (indexTest === -1) {
+          this.deckList.push(carteApusher);
+          this.envoiCartePlusDispo(carteApusher.name);
+          // console.log(this.deckList);
+        }
+
       }
     },
     removeCard(e) {
@@ -68,7 +83,7 @@ export default {
       let indexTest = this.deckList.findIndex((obj) => obj.name === nomCarte);
       if (Carte.copy === 2) {
         this.deckList[indexTest].copy = 1;
-        this.envoiCarteReDispo(this.deckList[indexTest].name);
+        this.envoiCarteReDispo(this.deckList[indexTest].name); // envoi info que carte de nouveau disponible
         this.$forceUpdate();
       } else {
         this.deckList.splice(indexTest, 1);
@@ -79,8 +94,8 @@ export default {
       bus.$emit("cartePlusDispo", nomCarte);
     },
     envoiCarteReDispo(nomCarte) {
-      bus.$emit("carteReDispo", nomCarte)
-    }
+      bus.$emit("carteReDispo", nomCarte);
+    },
   },
 };
 </script>

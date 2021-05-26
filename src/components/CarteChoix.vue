@@ -26,6 +26,7 @@
             :id="tabObj.cardId"
             :data-carte-nom="tabObj.name"
             :data-carte-cout="tabObj.cost"
+            :data-carte-rarete="tabObj.rarity"
           />
         </div>
       </div>
@@ -122,6 +123,7 @@ export default {
     drag(ev) {
       ev.dataTransfer.setData("nom", ev.target.dataset.carteNom);
       ev.dataTransfer.setData("cout", ev.target.dataset.carteCout);
+      ev.dataTransfer.setData("rarete",ev.target.dataset.carteRarete)
     },
   },
 };
