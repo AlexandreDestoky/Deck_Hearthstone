@@ -68,6 +68,7 @@ export default {
       let indexTest = this.deckList.findIndex((obj) => obj.name === nomCarte);
       if (Carte.copy === 2) {
         this.deckList[indexTest].copy = 1;
+        this.envoiCarteReDispo(this.deckList[indexTest].name);
         this.$forceUpdate();
       } else {
         this.deckList.splice(indexTest, 1);
@@ -77,6 +78,9 @@ export default {
     envoiCartePlusDispo(nomCarte) {
       bus.$emit("cartePlusDispo", nomCarte);
     },
+    envoiCarteReDispo(nomCarte) {
+      bus.$emit("carteReDispo", nomCarte)
+    }
   },
 };
 </script>

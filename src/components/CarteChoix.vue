@@ -63,8 +63,11 @@ export default {
     });
     bus.$on("cartePlusDispo", (data) => {
       this.cartesPlusDispo.push(data);
-      console.log(this.cartesPlusDispo);
     });
+    bus.$on("carteReDispo",(data) => {
+      let index = this.cartesPlusDispo.indexOf(data);
+      this.cartesPlusDispo.splice(index,1);
+    })
   },
   methods: {
     fetchTest(classe, tris) {
