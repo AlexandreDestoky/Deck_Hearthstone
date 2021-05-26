@@ -3,7 +3,7 @@
   <div class="deck col-12 col-md-4">
     <div class="classeCard">
       <p>DECK CHAMAN</p>
-      <p>{{nbrCarte}}/30</p>
+      <p>{{ nbrCarte }}/30</p>
     </div>
     <div class="deckListe" @drop="drop" @dragover="allowDrop">
       <div class="carteListe" v-for="el of deckList" :key="el.name" @click="removeCard">
@@ -22,13 +22,13 @@ export default {
   data() {
     return {
       deckList: [],
-      nbrCarte : 0
+      nbrCarte: 0,
     };
   },
   created() {
     bus.$on("choixCarte", (data) => {
       data.copy = 1; //un exemplaire
-      this.alreadyInDeck(data.name,[data])
+      this.alreadyInDeck(data.name, [data]);
     });
   },
   methods: {
@@ -40,9 +40,9 @@ export default {
       //Nom et cout viennent du dataset de CarteChoix
       let coutCarte = ev.dataTransfer.getData("cout");
       let nomCarte = ev.dataTransfer.getData("nom");
-      this.alreadyInDeck(nomCarte,[{ name: nomCarte, cost: coutCarte, copy: 1 }])
+      this.alreadyInDeck(nomCarte, [{ name: nomCarte, cost: coutCarte, copy: 1 }]);
     },
-    alreadyInDeck(nomdeCarte,[carteApusher]) {
+    alreadyInDeck(nomdeCarte, [carteApusher]) {
       this.nbrCarte++;
       //Si l'a carte n'est pas dans la liste du deck, on l'ajoute, sinon on met la copie à 1
       let indexTest = this.deckList.findIndex((obj) => obj.name === nomdeCarte);
@@ -50,28 +50,33 @@ export default {
         this.deckList.push(carteApusher);
       } else {
         this.deckList[indexTest].copy = 2;
+        //on envoi le nom de la carte qui n'est plus dispo
+        this.envoiCartePlusDispo(this.deckList[indexTest].name);
       }
     },
     removeCard(e) {
       let nomCarte;
       if (e.target.parentNode.classList.contains("carteListe")) {
-      // le 2ème enfant du parent de l'élément sélectionné (évite problème si click sur cout ou nbr Exemplaire)
+        // le 2ème enfant du parent de l'élément sélectionné (évite problème si click sur cout ou nbr Exemplaire)
         nomCarte = e.target.parentNode.childNodes[1].textContent;
       } else {
-      //si on clique sur les carteListe sans cliquer sur élément qui la compose
+        //si on clique sur les carteListe sans cliquer sur élément qui la compose
         nomCarte = e.target.childNodes[1].textContent;
       }
 
-      let Carte = this.deckList.find(el => el.name === nomCarte); //la carte dans la deckList
+      let Carte = this.deckList.find((el) => el.name === nomCarte); //la carte dans la deckList
       let indexTest = this.deckList.findIndex((obj) => obj.name === nomCarte);
-      if(Carte.copy === 2) {
+      if (Carte.copy === 2) {
         this.deckList[indexTest].copy = 1;
         this.$forceUpdate();
       } else {
-        this.deckList.splice(indexTest,1);
+        this.deckList.splice(indexTest, 1);
       }
       this.nbrCarte--;
-    }
+    },
+    envoiCartePlusDispo(nomCarte) {
+      bus.$emit("cartePlusDispo", nomCarte);
+    },
   },
 };
 </script>

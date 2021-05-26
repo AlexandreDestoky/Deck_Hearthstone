@@ -19,7 +19,7 @@
         </template>
         <!-- Affichage carte neutre -->
         <template v-else>
-          <div class="carte" v-for="tabObj of tabCarte" :key="tabObj.cardId">
+          <div class="carte" v-for="tabObj of tabCarte" :key="tabObj.cardId" :class="{indisponible:cartesPlusDispo.includes(tabObj.name)}">
             <img :src="tabObj.img" :alt="tabObj.name" @click="envoiCarte(tabObj)" draggable="true" @dragstart="drag" :id="tabObj.cardId" :data-carte-nom="tabObj.name" :data-carte-cout="tabObj.cost"/>
           </div>
         </template>
@@ -40,6 +40,7 @@ export default {
       affichageClasse: true,
       couleurClasse: true,
       couleurNeutre: false,
+      cartesPlusDispo : []
     };
   },
   created() {
@@ -55,6 +56,10 @@ export default {
       this.tabCarte = this.fetchTest("NEUTRAL", this.triChoisi);
       if (this.classeChoisie) this.tabCarteClasse = this.fetchTest(this.classeChoisie, this.triChoisi);
     });
+    bus.$on("cartePlusDispo",(data) => {
+      this.cartesPlusDispo.push(data);
+      console.log(this.cartesPlusDispo);
+    })
   },
   methods: {
     fetchTest(classe, tris) {
