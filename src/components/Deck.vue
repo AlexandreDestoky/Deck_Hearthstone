@@ -71,6 +71,7 @@ export default {
       } else {
         this.deckList.splice(indexTest,1);
       }
+      this.nbrCarte--;
     }
   },
 };
