@@ -49,7 +49,6 @@ export default {
       if (indexTest === -1) {
         this.deckList.push(carteApusher);
       } else {
-        this.$set(this.deckList[indexTest],"cost", this.deckList[indexTest].cost++); //setter pour voir changement
         this.deckList[indexTest].copy = 2;
       }
     },
