@@ -6,12 +6,12 @@
       <p>{{nbrCarte}}/30</p>
     </div>
     <div class="deckListe" @drop="drop" @dragover="allowDrop">
-      <div class="carteListe" v-for="el of deckList" :key="el.name">
+      <div class="carteListe" v-for="el of deckList" :key="el.name" @click="removeCard">
         <p class="coutMana">{{ el.cost }}</p>
         <p class="nom">{{ el.name }}</p>
         <p class="nbrExemplaire">X{{ el.copy }}</p>
       </div>
-      <h1>coucou</h1>
+      <h1 v-if="this.deckList.length === 0" class="info-deck">Cliquez sur les cartes ou faites les glisser pour les ajouter</h1>
     </div>
   </div>
 </template>
@@ -51,6 +51,25 @@ export default {
       } else {
         this.$set(this.deckList[indexTest],"cost", this.deckList[indexTest].cost++); //setter pour voir changement
         this.deckList[indexTest].copy = 2;
+      }
+    },
+    removeCard(e) {
+      let nomCarte;
+      if (e.target.parentNode.classList.contains("carteListe")) {
+      // le 2ème enfant du parent de l'élément sélectionné (évite problème si click sur cout ou nbr Exemplaire)
+        nomCarte = e.target.parentNode.childNodes[1].textContent;
+      } else {
+      //si on clique sur les carteListe sans cliquer sur élément qui la compose
+        nomCarte = e.target.childNodes[1].textContent;
+      }
+
+      let Carte = this.deckList.find(el => el.name === nomCarte); //la carte dans la deckList
+      let indexTest = this.deckList.findIndex((obj) => obj.name === nomCarte);
+      if(Carte.copy === 2) {
+        this.deckList[indexTest].copy = 1;
+        this.$forceUpdate();
+      } else {
+        this.deckList.splice(indexTest,1);
       }
     }
   },

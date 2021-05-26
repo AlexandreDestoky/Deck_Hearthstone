@@ -189,8 +189,6 @@ select,
 
 
 
-
-
 .boxCard {
   width:95%;
   margin:auto;
@@ -258,6 +256,12 @@ select,
   max-height: calc(100vh - 90px);
   overflow: auto;
   border: 5px solid firebrick;
+  min-height: 20vh;
+}
+
+.info-deck {
+  font-size: 1.5rem;
+  text-shadow: 2px 2px 2px rgba(178, 34, 34, 0.623);
 }
 
 /* CARTE DANS DECK */
@@ -267,7 +271,7 @@ select,
   justify-content: space-between;
   align-items: center;
   border: 2px solid black;
-  height: 45px;
+  height: 50px;
   user-select: none;
   font-weight: bold;
 }
@@ -281,17 +285,6 @@ select,
   color: #0077b6;
 }
 
-/* Carte Survol */
-/* .carteListe:hover:before {
-  background-image: url("images/gravure.png");
-  background-size: 175px 245px;
-  position: absolute;
-  left: -175px;
-  top: 150px;
-  width: 175px;
-  height: 245px;
-  content: "";
-} */
 
 /* Stylisation liste des cartes dans deck */
 .carteListe > * {
