@@ -56,15 +56,17 @@ export default {
      * Fonction de test si une carte est déja dans le deck
      */
     alreadyInDeck(nomdeCarte, [carteApusher]) {
-      this.nbrCarte++; //compteur de carte augmente
-      let indexTest = this.deckList.findIndex((obj) => obj.name === nomdeCarte);
-      //Si l'a carte n'est pas dans la liste du deck, on l'ajoute, sinon on met la copie à 1 (sauf légendaire)
-      if (indexTest === -1) {
-        this.deckList.push(carteApusher);
-        if (carteApusher.rarity === "Legendary") this.envoiCartePlusDispo(carteApusher.name); //la carte n'est plus dispo après 1exemplaire si légendaire
-      } else {
-        this.deckList[indexTest].copy = 2;
-        this.envoiCartePlusDispo(this.deckList[indexTest].name); //on envoi le nom de la carte qui n'est plus dispo
+      if (this.nbrCarte < 30) {
+        this.nbrCarte++; //compteur de carte augmente
+        let indexTest = this.deckList.findIndex((obj) => obj.name === nomdeCarte);
+        //Si l'a carte n'est pas dans la liste du deck, on l'ajoute, sinon on met la copie à 1 (sauf légendaire)
+        if (indexTest === -1) {
+          this.deckList.push(carteApusher);
+          if (carteApusher.rarity === "Legendary") this.envoiCartePlusDispo(carteApusher.name); //la carte n'est plus dispo après 1exemplaire si légendaire
+        } else {
+          this.deckList[indexTest].copy = 2;
+          this.envoiCartePlusDispo(this.deckList[indexTest].name); //on envoi le nom de la carte qui n'est plus dispo
+        }
       }
     },
     /**
@@ -113,7 +115,7 @@ export default {
           couleur = "#ce11ce";
           break;
         case "Rare":
-          couleur = "#0077b6";
+          couleur = "#4899f4";
           break;
         default:
           couleur = "#eee";
