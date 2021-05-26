@@ -45,28 +45,23 @@ export default {
     },
     alreadyInDeck(nomdeCarte, [carteApusher]) {
       this.nbrCarte++;
-      //Si la carte n'est pas légendaire ...
       let indexTest = this.deckList.findIndex((obj) => obj.name === nomdeCarte);
-      //Si l'a carte n'est pas dans la liste du deck, on l'ajoute, sinon on met la copie à 1
+      //Si l'a carte n'est pas dans la liste du deck, on l'ajoute, sinon on met la copie à 1 (sauf légendaire)
       if (indexTest === -1) {
         this.deckList.push(carteApusher);
-        if (carteApusher.rarity === "Legendary") this.envoiCartePlusDispo(carteApusher.name);
+        if (carteApusher.rarity === "Legendary") this.envoiCartePlusDispo(carteApusher.name); //la carte n'est plus dispo après 1exemplaire si légendaire
       } else {
         this.deckList[indexTest].copy = 2;
-        //on envoi le nom de la carte qui n'est plus dispo
-        this.envoiCartePlusDispo(this.deckList[indexTest].name);
+        this.envoiCartePlusDispo(this.deckList[indexTest].name);   //on envoi le nom de la carte qui n'est plus dispo
       }
     },
     removeCard(e) {
       let nomCarte;
       if (e.target.parentNode.classList.contains("carteListe")) {
-        // le 2ème enfant du parent de l'élément sélectionné (évite problème si click sur cout ou nbr Exemplaire)
-        nomCarte = e.target.parentNode.childNodes[1].textContent;
+        nomCarte = e.target.parentNode.childNodes[1].textContent;  // le 2ème enfant du parent de l'élément sélectionné (évite problème si click sur cout ou nbr Exemplaire)
       } else {
-        //si on clique sur les carteListe sans cliquer sur élément qui la compose
-        nomCarte = e.target.childNodes[1].textContent;
+        nomCarte = e.target.childNodes[1].textContent; //si on clique sur les carteListe sans cliquer sur élément qui la compose
       }
-
       let Carte = this.deckList.find((el) => el.name === nomCarte); //la carte dans la deckList
       let indexTest = this.deckList.findIndex((obj) => obj.name === nomCarte);
       if (Carte.copy === 2) {
@@ -74,6 +69,7 @@ export default {
         this.envoiCarteReDispo(this.deckList[indexTest].name); // envoi info que carte de nouveau disponible
         this.$forceUpdate();
       } else {
+        if(this.deckList[indexTest].rarity === "Legendary") this.envoiCarteReDispo(this.deckList[indexTest].name); //si légendaire, dispo seulement quand plus d'exemplaire
         this.deckList.splice(indexTest, 1);
       }
       this.nbrCarte--;
