@@ -8,7 +8,7 @@
     <div class="deckListe" @drop="drop" @dragover="allowDrop">
       <div class="carteListe" v-for="el of deckList" :key="el.name" @click="removeCard">
         <p class="coutMana">{{ el.cost }}</p>
-        <p class="nom">{{ el.name }}</p>
+        <p class="nom" :style="{ color: changementCouleur(el.rarity) }">{{ el.name }}</p>
         <p class="nbrExemplaire">X{{ el.copy }}</p>
       </div>
       <!-- Si il n'y a pas de carte dans le deck on donne les instructions -->
@@ -23,7 +23,8 @@ export default {
   data() {
     return {
       deckList: [], //Liste des cartes dans deck
-      nbrCarte: 0, //Compteur 
+      nbrCarte: 0, //Compteur
+      // couleurRarete: false
     };
   },
   created() {
@@ -35,14 +36,14 @@ export default {
   },
   methods: {
     /**
-    * Empeche comportement par défaut d'empecher le drop
-    */
+     * Empeche comportement par défaut d'empecher le drop
+     */
     allowDrop(ev) {
       ev.preventDefault();
     },
     /**
-    * Lorsque l'on drop une carte dans la partie deck
-    */
+     * Lorsque l'on drop une carte dans la partie deck
+     */
     drop(ev) {
       ev.preventDefault();
       //Nom,cout et rareté viennent du dataset de CarteChoix
@@ -52,8 +53,8 @@ export default {
       this.alreadyInDeck(nomCarte, [{ name: nomCarte, cost: coutCarte, rarity: rareteCarte, copy: 1 }]);
     },
     /**
-    * Fonction de test si une carte est déja dans le deck
-    */
+     * Fonction de test si une carte est déja dans le deck
+     */
     alreadyInDeck(nomdeCarte, [carteApusher]) {
       this.nbrCarte++; //compteur de carte augmente
       let indexTest = this.deckList.findIndex((obj) => obj.name === nomdeCarte);
@@ -63,17 +64,17 @@ export default {
         if (carteApusher.rarity === "Legendary") this.envoiCartePlusDispo(carteApusher.name); //la carte n'est plus dispo après 1exemplaire si légendaire
       } else {
         this.deckList[indexTest].copy = 2;
-        this.envoiCartePlusDispo(this.deckList[indexTest].name);   //on envoi le nom de la carte qui n'est plus dispo
+        this.envoiCartePlusDispo(this.deckList[indexTest].name); //on envoi le nom de la carte qui n'est plus dispo
       }
     },
     /**
-    * Fonction Pour enlever une carte du deck
-    */
+     * Fonction Pour enlever une carte du deck
+     */
     removeCard(e) {
       this.nbrCarte--; //compteur de carte diminue
       let nomCarte;
       if (e.target.parentNode.classList.contains("carteListe")) {
-        nomCarte = e.target.parentNode.childNodes[1].textContent;  // le 2ème enfant du parent de l'élément sélectionné (évite problème si click sur cout ou nbr Exemplaire)
+        nomCarte = e.target.parentNode.childNodes[1].textContent; // le 2ème enfant du parent de l'élément sélectionné (évite problème si click sur cout ou nbr Exemplaire)
       } else {
         nomCarte = e.target.childNodes[1].textContent; //si on clique sur les .carteListe sans cliquer sur élément qui la compose
       }
@@ -84,23 +85,41 @@ export default {
         this.envoiCarteReDispo(this.deckList[indexTest].name); // envoi info que carte de nouveau disponible
         this.$forceUpdate(); //force la mise a jour de l'affichage pour voir suppression
       } else {
-        if(this.deckList[indexTest].rarity === "Legendary") this.envoiCarteReDispo(this.deckList[indexTest].name); //si légendaire, dispo seulement quand plus d'exemplaire
+        if (this.deckList[indexTest].rarity === "Legendary") this.envoiCarteReDispo(this.deckList[indexTest].name); //si légendaire, dispo seulement quand plus d'exemplaire
         this.deckList.splice(indexTest, 1); // on enleve la carte de la decklist
       }
     },
     /**
-    * Fonction d'envoi de l'information qu'une carte n'est plus disponible 
-    * (nombre maximum dans un deck est atteint)
-    */
+     * Fonction d'envoi de l'information qu'une carte n'est plus disponible
+     * (nombre maximum dans un deck est atteint)
+     */
     envoiCartePlusDispo(nomCarte) {
       bus.$emit("cartePlusDispo", nomCarte);
     },
     /**
-    * Fonction d'envoi de l'information qu'une carte est de nouveau disponible
-    * (nombre maximum dans un deck n'est plus atteint)
-    */
+     * Fonction d'envoi de l'information qu'une carte est de nouveau disponible
+     * (nombre maximum dans un deck n'est plus atteint)
+     */
     envoiCarteReDispo(nomCarte) {
       bus.$emit("carteReDispo", nomCarte);
+    },
+    changementCouleur(rarete) {
+      let couleur;
+      switch (rarete) {
+        case "Legendary":
+          couleur = "#fdc500";
+          break;
+        case "Epic":
+          couleur = "#ce11ce";
+          break;
+        case "Rare":
+          couleur = "#0077b6";
+          break;
+        default:
+          couleur = "#eee";
+          break;
+      }
+      return couleur;
     },
   },
 };
