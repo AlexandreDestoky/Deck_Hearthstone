@@ -9,6 +9,7 @@
         <Deck />
       </div>
     </div>
+    <PopUpInfo />
     <!-------------------------------- FOOTER -------------------------------->
     <footer>
       <p>Cette Application est réalisé par :</p>
@@ -22,6 +23,7 @@ import ChoixPerso from "./components/ChoixPerso.vue";
 import BarreTri from "./components/BarreTri.vue";
 import CarteChoix from "./components/CarteChoix.vue";
 import Deck from "./components/Deck.vue";
+import PopUpInfo from "./components/PopUpInfo.vue";
 
 export default {
   name: "App",
@@ -30,6 +32,7 @@ export default {
     BarreTri,
     CarteChoix,
     Deck,
+    PopUpInfo
   },
 };
 </script>
