@@ -62,7 +62,7 @@ export default {
     });
     bus.$on("changementClasse", (data) => {
       this.deckVide = true;
-      this.popUpValider(data);
+      this.classChange(data);
     });
   },
   methods: {
@@ -72,12 +72,7 @@ export default {
     toggleActive(e) {
       let classe = e.target.parentNode.id;
       if (this.deckVide) {
-      for (let el in this.isActive) {
-        this.isActive[el] = false;
-      }
-      this.isActive[classe] = true; // on met la classe choisie en true
-        this.choixClasse = classe;
-        this.envoiChoixClasse(classe);
+        this.classChange(classe);
       } else {
         this.openPopUpChoice(classe); // si le deck n'est pas vide, on envoi le nom de la classe au popup
       }
@@ -88,7 +83,7 @@ export default {
     openPopUpChoice(nouvelleClasse) {
       bus.$emit("popUpChoiceVisible", [this.popUpChoiceTitre, this.popUpChoiceTexte, nouvelleClasse]);
     },
-    popUpValider(nouvelleClasse) {
+    classChange(nouvelleClasse) {
             for (let el in this.isActive) {
         this.isActive[el] = false;
       }
