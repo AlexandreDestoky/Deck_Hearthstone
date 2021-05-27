@@ -24,8 +24,8 @@ export default {
     return {
       deckList: [], //Liste des cartes dans deck
       nbrCarte: 0, //Compteur
-      popUpTitre: "Votre deck est plein !",
-      popUpTexte: "Vous devez d'abord retirer une carte avant d'en ajouter une.",
+      popUpInfoTitre: "Votre deck est plein !",
+      popUpInfoTexte: "Vous devez d'abord retirer une carte avant d'en ajouter une.",
     };
   },
   created() {
@@ -71,7 +71,7 @@ export default {
         }
         this.envoiNbrCartes(); // on informe qu'il y a des cartes
       } else {
-        this.openPopUp();
+        this.openPopUpInfo();
       }
     },
     /**
@@ -105,7 +105,7 @@ export default {
       bus.$emit("cartePlusDispo", nomCarte);
     },
     envoiNbrCartes() {
-      bus.$emit("nbrCartes", this.deckList.length > 0);
+      bus.$emit("nbrCartes", this.deckList.length === 0);
     },
     /**
      * Fonction d'envoi de l'information qu'une carte est de nouveau disponible
@@ -140,8 +140,8 @@ export default {
     triDeckListe() {
       this.deckList.sort((a, b) => a.cost - b.cost || a.name.localeCompare(b.name));
     },
-    openPopUp() {
-      bus.$emit("popUpInvisible", [this.popUpTitre, this.popUpTexte]);
+    openPopUpInfo() {
+      bus.$emit("popUpInfoVisible", [this.popUpInfoTitre, this.popUpInfoTexte]);
     },
   },
 };

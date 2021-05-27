@@ -31,13 +31,11 @@
     <div class="classeHS" :class="{ active: isActive['rogue'] }" id="rogue" @click="toggleActive">
       <img src="../assets/images/voleur.jpg" alt="" />
     </div>
-  <!-- test -->
-  <p>proute : {{testCarte}}</p>
   </div>
 </template>
 
 <script>
-import {bus} from "../main"
+import { bus } from "../main";
 export default {
   data() {
     return {
@@ -53,26 +51,38 @@ export default {
         priest: false,
         rogue: false,
       },
-      testCarte: 0
+      deckVide: true,
+      popUpChoiceTitre: "Vous avez déjà un deck pour une autre classe !",
+      popUpChoiceTexte: "Si vous changer de classe, votre deck actuel sera supprimé"
     };
   },
   created() {
-    bus.$on("nbrCartes",(data)=> {
-      this.testCarte = data;
-    })
+    bus.$on("nbrCartes", (data) => {
+      this.deckVide = data;
+    });
   },
   methods: {
     /**
      * Met l'image sélectionné en active et enlève le active des autres images
      */
     toggleActive(e) {
-      let classe = e.target.parentNode.id;
-      for(let el in this.isActive) {
-        this.isActive[el] = false;
+      if (this.deckVide) {
+        let classe = e.target.parentNode.id;
+        for (let el in this.isActive) {
+          this.isActive[el] = false;
+        }
+        this.isActive[classe] = true;
+        this.choixClasse = classe;
+        this.envoiChoixClasse(classe);
+      } else {
+        this.openPopUpChoice();
       }
-      this.isActive[classe] = true;
-      this.choixClasse = classe;
-      bus.$emit("choixClasse",classe);
+    },
+    envoiChoixClasse(nomClasse) {
+      bus.$emit("choixClasse", nomClasse);
+    },
+    openPopUpChoice() {
+      bus.$emit("popUpChoiceVisible", [this.popUpChoiceTitre, this.popUpChoiceTexte]);
     },
   },
 };
