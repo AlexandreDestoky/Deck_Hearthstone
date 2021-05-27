@@ -73,6 +73,7 @@ export default {
         //Si l'a carte n'est pas dans la liste du deck, on l'ajoute, sinon on met la copie à 1 (sauf légendaire)
         if (indexTest === -1) {
           this.deckList.push(carteApusher);
+          this.triDeckListe();
           if (carteApusher.rarity === "Legendary") this.envoiCartePlusDispo(carteApusher.name); //la carte n'est plus dispo après 1exemplaire si légendaire
         } else {
           this.deckList[indexTest].copy = 2;
@@ -141,6 +142,9 @@ export default {
         this.popUpInvisible = true;
       }
     },
+    triDeckListe() {
+      this.deckList.sort((a, b)=>  a.cost- b.cost || a.name.localeCompare(b.name));
+    }
   },
 };
 </script>
