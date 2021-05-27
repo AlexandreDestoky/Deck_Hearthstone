@@ -22,12 +22,14 @@ export default {
       popUpInvisible: true,
       titre: "",
       texte: "",
+      nomNouvelleClasse : undefined
     };
   },
   created() {
     bus.$on("popUpChoiceVisible", (data) => {
       this.titre = data[0];
       this.texte = data[1];
+      this.nomNouvelleClasse = data[2];
       this.popUpInvisible = false;
     });
   },
@@ -39,6 +41,7 @@ export default {
     },
     viderDeck() {
       bus.$emit("vidageDeck",true);
+      bus.$emit("changementClasse",this.nomNouvelleClasse);
       this.popUpInvisible = true;
     }
   },
