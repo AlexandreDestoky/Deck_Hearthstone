@@ -7,7 +7,7 @@
         <p>Si vous changer de classe, votre deck actuel sera supprimé</p>
       </div>
       <div class="boutons">
-        <a href="#" class="validate">OK</a>
+        <a href="#" class="validate" @click="viderDeck">OK</a>
         <a href="#" class="cancel">ANNULER</a>
       </div>
     </div>
@@ -37,6 +37,10 @@ export default {
         this.popUpInvisible = true;
       }
     },
+    viderDeck() {
+      bus.$emit("vidageDeck",true);
+      this.popUpInvisible = true;
+    }
   },
 };
 </script>

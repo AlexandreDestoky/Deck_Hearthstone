@@ -34,6 +34,12 @@ export default {
       data.copy = 1; //un exemplaire
       this.alreadyInDeck(data.name, [data]);
     });
+    bus.$on("vidageDeck",(data)=> {
+      if(data) {
+        this.deckList = [];
+        this.nbrCarte = 0;
+      }
+    });
   },
   methods: {
     /**
