@@ -4,8 +4,10 @@
     <div class="textBox">
       <span class="croix">❌</span>
       <div class="contenu">
-        <h3>Votre deck est plein !</h3>
-        <p>Vous devez d'abord retirer une carte avant d'en ajouter une.</p>
+        <!-- <h3>Votre deck est plein !</h3>
+        <p>Vous devez d'abord retirer une carte avant d'en ajouter une.</p> -->
+        <h3>{{titre}}</h3>
+        <p>{{texte}}</p>
       </div>
     </div>
   </div>
@@ -17,11 +19,15 @@ export default {
   data() {
     return {
       popUpInvisible: true,
+      titre: "",
+      texte: ""
     };
   },
     created() {
     bus.$on("popUpInvisible", (data)=> {
-      this.popUpInvisible = data;
+      this.titre = data[0];
+      this.texte = data[1];
+      this.popUpInvisible = false;
     })
   },
   methods: {

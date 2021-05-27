@@ -24,6 +24,8 @@ export default {
     return {
       deckList: [], //Liste des cartes dans deck
       nbrCarte: 0, //Compteur
+      popUpTitre : "Votre deck est plein !",
+      popUpTexte : "Vous devez d'abord retirer une carte avant d'en ajouter une.",
     };
   },
   created() {
@@ -134,7 +136,7 @@ export default {
       this.deckList.sort((a, b)=>  a.cost- b.cost || a.name.localeCompare(b.name));
     },
     openPopUp() {
-      bus.$emit("popUpInvisible",false);
+      bus.$emit("popUpInvisible",[this.popUpTitre,this.popUpTexte]);
     }
   },
 };
