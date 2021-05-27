@@ -2,7 +2,7 @@
   <!-------------------------------- DECK -------------------------------->
   <div class="deck col-12 col-md-4">
     <div class="classeCard">
-      <p>DECK CHAMAN</p>
+      <p>{{classeChoisie === undefined ? "CLASS" : formatageClasse(classeChoisie)}} DECK</p>
       <p>{{ nbrCarte }}/30</p>
     </div>
     <div class="deckListe" @drop="drop" @dragover="allowDrop">
@@ -26,6 +26,7 @@ export default {
       nbrCarte: 0, //Compteur
       popUpInfoTitre: "Votre deck est plein !",
       popUpInfoTexte: "Vous devez d'abord retirer une carte avant d'en ajouter une.",
+      classeChoisie: undefined,
     };
   },
   created() {
@@ -34,11 +35,15 @@ export default {
       data.copy = 1; //un exemplaire
       this.alreadyInDeck(data.name, [data]);
     });
-    bus.$on("vidageDeck",(data)=> {
-      if(data) {
+    bus.$on("vidageDeck", (data) => {
+      if (data) {
         this.deckList = [];
         this.nbrCarte = 0;
       }
+    });
+    //On donne à classeChoisie la classe choisie dans le composant choixPerso
+    bus.$on("choixClasse", (data) => {
+      this.classeChoisie = data;
     });
   },
   methods: {
@@ -148,6 +153,9 @@ export default {
     },
     openPopUpInfo() {
       bus.$emit("popUpInfoVisible", [this.popUpInfoTitre, this.popUpInfoTexte]);
+    },
+    formatageClasse(classe) {
+      return classe.replace("_", " ").toUpperCase();
     },
   },
 };
