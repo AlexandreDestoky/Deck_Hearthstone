@@ -31,6 +31,8 @@
     <div class="classeHS" :class="{ active: isActive['rogue'] }" id="rogue" @click="toggleActive">
       <img src="../assets/images/voleur.jpg" alt="" />
     </div>
+  <!-- test -->
+  <p>proute : {{testCarte}}</p>
   </div>
 </template>
 
@@ -51,7 +53,13 @@ export default {
         priest: false,
         rogue: false,
       },
+      testCarte: 0
     };
+  },
+  created() {
+    bus.$on("nbrCartes",(data)=> {
+      this.testCarte = data;
+    })
   },
   methods: {
     /**

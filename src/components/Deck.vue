@@ -24,8 +24,8 @@ export default {
     return {
       deckList: [], //Liste des cartes dans deck
       nbrCarte: 0, //Compteur
-      popUpTitre : "Votre deck est plein !",
-      popUpTexte : "Vous devez d'abord retirer une carte avant d'en ajouter une.",
+      popUpTitre: "Votre deck est plein !",
+      popUpTexte: "Vous devez d'abord retirer une carte avant d'en ajouter une.",
     };
   },
   created() {
@@ -69,6 +69,7 @@ export default {
           this.deckList[indexTest].copy = 2;
           this.envoiCartePlusDispo(this.deckList[indexTest].name); //on envoi le nom de la carte qui n'est plus dispo
         }
+        this.envoiNbrCartes(); // on informe qu'il y a des cartes
       } else {
         this.openPopUp();
       }
@@ -94,6 +95,7 @@ export default {
         if (this.deckList[indexTest].rarity === "Legendary") this.envoiCarteReDispo(this.deckList[indexTest].name); //si légendaire, dispo seulement quand plus d'exemplaire
         this.deckList.splice(indexTest, 1); // on enleve la carte de la decklist
       }
+      this.envoiNbrCartes();
     },
     /**
      * Fonction d'envoi de l'information qu'une carte n'est plus disponible
@@ -101,6 +103,9 @@ export default {
      */
     envoiCartePlusDispo(nomCarte) {
       bus.$emit("cartePlusDispo", nomCarte);
+    },
+    envoiNbrCartes() {
+      bus.$emit("nbrCartes", this.deckList.length > 0);
     },
     /**
      * Fonction d'envoi de l'information qu'une carte est de nouveau disponible
@@ -133,15 +138,13 @@ export default {
     //   }
     // },
     triDeckListe() {
-      this.deckList.sort((a, b)=>  a.cost- b.cost || a.name.localeCompare(b.name));
+      this.deckList.sort((a, b) => a.cost - b.cost || a.name.localeCompare(b.name));
     },
     openPopUp() {
-      bus.$emit("popUpInvisible",[this.popUpTitre,this.popUpTexte]);
-    }
+      bus.$emit("popUpInvisible", [this.popUpTitre, this.popUpTexte]);
+    },
   },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

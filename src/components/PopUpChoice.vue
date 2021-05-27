@@ -2,12 +2,13 @@
   <!-- MODALE -->
   <div class="popUp" :class="{ invisible: popUpInvisible }" @click="removePopUp">
     <div class="textBox">
-      <span class="croix">❌</span>
       <div class="contenu">
-        <!-- <h3>Votre deck est plein !</h3>
-        <p>Vous devez d'abord retirer une carte avant d'en ajouter une.</p> -->
-        <h3>{{titre}}</h3>
-        <p>{{texte}}</p>
+        <h3>Vous avez déjà un deck pour une autre classe !</h3>
+        <p>Si vous changer de classe, votre deck actuel sera supprimé</p>
+      </div>
+      <div class="boutons">
+        <a href="#" class="validate">OK</a>
+        <a href="#" class="cancel">ANNULER</a>
       </div>
     </div>
   </div>
@@ -20,15 +21,15 @@ export default {
     return {
       popUpInvisible: true,
       titre: "",
-      texte: ""
+      texte: "",
     };
   },
-    created() {
-    bus.$on("popUpInvisible", (data)=> {
+  created() {
+    bus.$on("popUpInvisible", (data) => {
       this.titre = data[0];
       this.texte = data[1];
       this.popUpInvisible = false;
-    })
+    });
   },
   methods: {
     removePopUp(e) {
@@ -71,11 +72,48 @@ export default {
   position: absolute;
   top: 10px;
   right: 10px;
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   cursor: pointer;
 }
 
 .invisible {
   display: none;
+}
+
+.boutons {
+  display: flex;
+  justify-content: center;
+  margin-top: 3em;
+}
+
+.boutons a {
+  padding: 0.2em 1em;
+  border: 2px solid black;
+  border-radius: 20px;
+  margin: 0 0.5em;
+  width: 40%;
+  text-align: center;
+  text-decoration: none;
+  color: #eee;
+}
+
+.validate {
+  background-color: green;
+}
+
+.validate:hover {
+  background-color: #0b380b;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.336);
+}
+
+.boutons a:hover {
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.336);
+}
+.cancel {
+  background-color: firebrick;
+  display: table;
+}
+.cancel:hover {
+  background-color: #6f0a0a;
 }
 </style>
