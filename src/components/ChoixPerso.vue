@@ -1,34 +1,34 @@
 <template>
   <div class="choixClasse">
     <!---------------------- CLASSE HEARTHSTONE-------------------- -->
-    <div class="classeHS" :class="{ active: isActive['shaman'] }" id="shaman" @click="toggleActive">
+    <div class="classeHS" :class="{ active: isActive['shaman'],incliquable:isActive['shaman'] }" id="shaman" @click="toggleActive">
       <img src="../assets/images/chaman.jpg" alt="" />
     </div>
-    <div class="classeHS" :class="{ active: isActive['demon_hunter'] }" id="demon_hunter" @click="toggleActive">
+    <div class="classeHS" :class="{ active: isActive['demon_hunter'],incliquable:isActive['demon_hunter'] }" id="demon_hunter" @click="toggleActive">
       <img src="../assets/images/chasseur-de-demons.jpg" alt="" />
     </div>
-    <div class="classeHS" :class="{ active: isActive['hunter'] }" id="hunter" @click="toggleActive">
+    <div class="classeHS" :class="{ active: isActive['hunter'],incliquable:isActive['hunter'] }" id="hunter" @click="toggleActive">
       <img src="../assets/images/chasseur.jpg" alt="" />
     </div>
-    <div class="classeHS" :class="{ active: isActive['warlock'] }" id="warlock" @click="toggleActive">
+    <div class="classeHS" :class="{ active: isActive['warlock'],incliquable:isActive['warlock'] }" id="warlock" @click="toggleActive">
       <img src="../assets/images/demoniste.jpg" alt="" />
     </div>
-    <div class="classeHS" :class="{ active: isActive['druid'] }" id="druid" @click="toggleActive">
+    <div class="classeHS" :class="{ active: isActive['druid'],incliquable:isActive['druid'] }" id="druid" @click="toggleActive">
       <img src="../assets/images/druide.jpg" alt="" />
     </div>
-    <div class="classeHS" :class="{ active: isActive['warrior'] }" id="warrior" @click="toggleActive">
+    <div class="classeHS" :class="{ active: isActive['warrior'],incliquable:isActive['warrior'] }" id="warrior" @click="toggleActive">
       <img src="../assets/images/guerrier.jpg" alt="" />
     </div>
-    <div class="classeHS" :class="{ active: isActive['mage'] }" id="mage" @click="toggleActive">
+    <div class="classeHS" :class="{ active: isActive['mage'],incliquable:isActive['mage'] }" id="mage" @click="toggleActive">
       <img src="../assets/images/mage.jpg" alt="" />
     </div>
-    <div class="classeHS" :class="{ active: isActive['paladin'] }" id="paladin" @click="toggleActive">
+    <div class="classeHS" :class="{ active: isActive['paladin'],incliquable:isActive['paladin'] }" id="paladin" @click="toggleActive">
       <img src="../assets/images/paladin.jpg" alt="" />
     </div>
-    <div class="classeHS" :class="{ active: isActive['priest'] }" id="priest" @click="toggleActive">
+    <div class="classeHS" :class="{ active: isActive['priest'],incliquable:isActive['priest'] }" id="priest" @click="toggleActive">
       <img src="../assets/images/pretre.jpg" alt="" />
     </div>
-    <div class="classeHS" :class="{ active: isActive['rogue'] }" id="rogue" @click="toggleActive">
+    <div class="classeHS" :class="{ active: isActive['rogue'],incliquable:isActive['rogue'] }" id="rogue" @click="toggleActive">
       <img src="../assets/images/voleur.jpg" alt="" />
     </div>
   </div>
@@ -84,7 +84,7 @@ export default {
       bus.$emit("popUpChoiceVisible", [this.popUpChoiceTitre, this.popUpChoiceTexte, nouvelleClasse]);
     },
     classChange(nouvelleClasse) {
-            for (let el in this.isActive) {
+      for (let el in this.isActive) {
         this.isActive[el] = false;
       }
       this.isActive[nouvelleClasse] = true; // on met la classe choisie en true
