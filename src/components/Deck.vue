@@ -2,7 +2,7 @@
   <!-------------------------------- DECK -------------------------------->
   <div class="deck col-12 col-md-4">
     <div class="classeCard">
-      <p>{{classeChoisie === undefined ? "CLASS" : formatageClasse(classeChoisie)}} DECK</p>
+      <p>{{ classeChoisie === undefined ? "CLASS" : formatageClasse(classeChoisie) }} DECK</p>
       <p>{{ nbrCarte }}/30</p>
     </div>
     <div class="deckListe" @drop="drop" @dragover="allowDrop">
@@ -46,6 +46,18 @@ export default {
       this.classeChoisie = data;
     });
   },
+  mounted() {
+    if (localStorage.getItem("deckListe")) {
+      try {
+        this.deckList = JSON.parse(localStorage.getItem("deckListe"));
+        this.nbrCarte = this.deckList.reduce(function(a, b) {
+          return a + b.copy;
+        }, 0);
+      } catch (e) {
+        localStorage.removeItem("deckListe");
+      }
+    }
+  },
   methods: {
     /**
      * Empeche comportement par défaut d'empecher le drop
@@ -75,9 +87,11 @@ export default {
         if (indexTest === -1) {
           this.deckList.push(carteApusher);
           this.triDeckListe();
+          localStorage.setItem("deckListe", JSON.stringify(this.deckList)); //LOCALE STORAGE -*-*-*-*-**-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*-*-*
           if (carteApusher.rarity === "Legendary") this.envoiCartePlusDispo(carteApusher.name); //la carte n'est plus dispo après 1exemplaire si légendaire
         } else {
           this.deckList[indexTest].copy = 2;
+          localStorage.setItem("deckListe", JSON.stringify(this.deckList)); //LOCALE STORAGE -*-*-*-*-**-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*-*-*
           this.envoiCartePlusDispo(this.deckList[indexTest].name); //on envoi le nom de la carte qui n'est plus dispo
         }
         this.envoiNbrCartes(); // on informe qu'il y a des cartes
@@ -100,11 +114,13 @@ export default {
       let indexTest = this.deckList.findIndex((obj) => obj.name === nomCarte);
       if (Carte.copy === 2) {
         this.deckList[indexTest].copy = 1;
+        localStorage.setItem("deckListe", JSON.stringify(this.deckList)); //LOCALE STORAGE -*-*-*-*-**-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*-*-*
         this.envoiCarteReDispo(this.deckList[indexTest].name); // envoi info que carte de nouveau disponible
         this.$forceUpdate(); //force la mise a jour de l'affichage pour voir suppression
       } else {
         if (this.deckList[indexTest].rarity === "Legendary") this.envoiCarteReDispo(this.deckList[indexTest].name); //si légendaire, dispo seulement quand plus d'exemplaire
         this.deckList.splice(indexTest, 1); // on enleve la carte de la decklist
+        localStorage.setItem("deckListe", JSON.stringify(this.deckList)); //LOCALE STORAGE -*-*-*-*-**-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*-*-*
       }
       this.envoiNbrCartes();
     },
