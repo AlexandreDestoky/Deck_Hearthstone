@@ -64,16 +64,29 @@ export default {
     });
     bus.$on("cartePlusDispo", (data) => {
       this.cartesPlusDispo.push(data);
+      localStorage.setItem("plusDispo", JSON.stringify(this.cartesPlusDispo)); //LOCALE STORAGE -*-*-*-*-**-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*-*-*
     });
-    bus.$on("carteReDispo",(data) => {
+    bus.$on("carteReDispo", (data) => {
       let index = this.cartesPlusDispo.indexOf(data);
-      this.cartesPlusDispo.splice(index,1);
+      this.cartesPlusDispo.splice(index, 1);
+      localStorage.setItem("plusDispo", JSON.stringify(this.cartesPlusDispo)); //LOCALE STORAGE -*-*-*-*-**-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*-*-*
     });
+    /**Pop UP CHOICE */
     bus.$on("vidagePlusDispo", (data) => {
       if (data) {
-      this.cartesPlusDispo = [];
+        this.cartesPlusDispo = [];
+        localStorage.setItem("plusDispo", JSON.stringify(this.cartesPlusDispo)); //LOCALE STORAGE -*-*-*-*-**-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*-*-*
       }
     });
+  },
+  mounted() {
+    if (localStorage.getItem("plusDispo")) {
+      try {
+        this.cartesPlusDispo = JSON.parse(localStorage.getItem("plusDispo"));
+      } catch (e) {
+        localStorage.removeItem("plusDispo");
+      }
+    }
   },
   methods: {
     fetchTest(classe, tris) {
@@ -128,7 +141,7 @@ export default {
     drag(ev) {
       ev.dataTransfer.setData("nom", ev.target.dataset.carteNom);
       ev.dataTransfer.setData("cout", ev.target.dataset.carteCout);
-      ev.dataTransfer.setData("rarete",ev.target.dataset.carteRarete)
+      ev.dataTransfer.setData("rarete", ev.target.dataset.carteRarete);
     },
   },
 };
