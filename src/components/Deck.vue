@@ -53,6 +53,7 @@ export default {
         this.nbrCarte = this.deckList.reduce(function(a, b) {
           return a + b.copy;
         }, 0);
+        this.envoiNbrCartes();
       } catch (e) {
         localStorage.removeItem("deckListe");
       }

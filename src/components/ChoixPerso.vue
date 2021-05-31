@@ -51,12 +51,14 @@ export default {
         priest: false,
         rogue: false,
       },
+      classeChoisie : "",
       deckVide: true,
       popUpChoiceTitre: "Vous avez déjà un deck pour une autre classe !",
       popUpChoiceTexte: "Si vous changer de classe, votre deck actuel sera supprimé",
     };
   },
   created() {
+    //Le nombre de cartes reçu par le deck 
     bus.$on("nbrCartes", (data) => {
       this.deckVide = data;
     });
@@ -65,24 +67,41 @@ export default {
       this.classChange(data);
     });
   },
+  mounted() {
+    if (localStorage.getItem("classe")) {
+      let classe = localStorage.getItem("classe");
+      this.classChange(classe);
+      this.envoiChoixClasse(classe);
+    }
+  },
   methods: {
     /**
      * Met l'image sélectionné en active et enlève le active des autres images
      */
     toggleActive(e) {
-      let classe = e.target.parentNode.id;
+      this.classeChoisie = e.target.parentNode.id;
+      localStorage.setItem("classe",this.classeChoisie);
       if (this.deckVide) {
-        this.classChange(classe);
+        this.classChange(this.classeChoisie);
       } else {
-        this.openPopUpChoice(classe); // si le deck n'est pas vide, on envoi le nom de la classe au popup
+        this.openPopUpChoice(this.classeChoisie); // si le deck n'est pas vide, on envoi le nom de la classe au popup
       }
     },
+    /**
+     * On envoi le nom de la classe
+     */
     envoiChoixClasse(nomClasse) {
       bus.$emit("choixClasse", nomClasse);
     },
+    /**
+     * On ouvre le pop up de CHOIX
+     */
     openPopUpChoice(nouvelleClasse) {
       bus.$emit("popUpChoiceVisible", [this.popUpChoiceTitre, this.popUpChoiceTexte, nouvelleClasse]);
     },
+    /**
+     * Changment de classe
+     */
     classChange(nouvelleClasse) {
       for (let el in this.isActive) {
         this.isActive[el] = false;
