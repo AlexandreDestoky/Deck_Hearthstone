@@ -42,6 +42,7 @@ export default {
     viderDeck() {
       bus.$emit("vidageDeck",true);
       bus.$emit("changementClasse",this.nomNouvelleClasse);
+      bus.$emit("vidagePlusDispo", true);
       this.popUpInvisible = true;
     }
   },
