@@ -12,7 +12,7 @@
         <p class="nbrExemplaire">X{{ el.copy }}</p>
       </div>
       <!-- Si il n'y a pas de carte dans le deck on donne les instructions -->
-      <h1 v-if="this.deckList.length === 0" class="info-deck">Cliquez sur les cartes ou faites les glisser pour les ajouter</h1>
+      <h1 v-if="this.deckList.length === 0" class="info-deck">Click or drag cards to add them</h1>
     </div>
   </div>
 </template>

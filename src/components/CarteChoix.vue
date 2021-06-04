@@ -9,7 +9,7 @@
       <div class="neutre" @click="affichageClasse = false">NEUTRAL CARDS</div>
     </div>
     <div class="carteAffichage" :class="{ couleurClasse: affichageClasse, couleurNeutre: !affichageClasse }">
-      <h1 v-if="classeChoisie === undefined" class="info-choix-classe">Veuillez choisir une classe</h1>
+      <h1 v-if="classeChoisie === undefined" class="info-choix-classe">Please choose a class</h1>
       <div class="boxCard" v-else>
         <div
           class="carte"

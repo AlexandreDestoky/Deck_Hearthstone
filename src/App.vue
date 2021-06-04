@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>Constructeur de Deck Hearthstone</h1>
+    <h1>Hearthstone Deck Builder</h1>
     <div class="container">
       <ChoixPerso />
       <BarreTri />
@@ -13,7 +13,7 @@
     <PopUpChoice />
     <!-------------------------------- FOOTER -------------------------------->
     <footer>
-      <p>Cette Application est réalisé par :</p>
+      <p>This Application is produced by :</p>
       <p>Alexandre Destoky</p>
     </footer>
   </div>
