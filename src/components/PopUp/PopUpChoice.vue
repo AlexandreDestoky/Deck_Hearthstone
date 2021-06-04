@@ -44,6 +44,7 @@ export default {
       bus.$emit("changementClasse",this.nomNouvelleClasse); // on informe ChoixPerso que l'on veut changer de classe
       bus.$emit("vidagePlusDispo", true);
       this.popUpInvisible = true;
+      localStorage.removeItem("deckListe");
     }
   },
 };
