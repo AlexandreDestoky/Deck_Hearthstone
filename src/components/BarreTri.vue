@@ -138,7 +138,8 @@ export default {
   },
   methods: {
     /**
-     * envoi l'événement "choixtri" avec comme donné le tri de carte
+     * Envoi de l'événement "choixtri" 
+     * les données envoyés sont les différents tri
      */
     envoiTri() {
       bus.$emit("choixTri",this.triCards); 

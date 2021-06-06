@@ -3,8 +3,8 @@
   <div class="popUp" :class="{ invisible: popUpInvisible }" @click="removePopUp">
     <div class="textBox">
       <div class="contenu">
-        <h3>Vous avez déjà un deck pour une autre classe !</h3>
-        <p>Si vous changer de classe, votre deck actuel sera supprimé</p>
+        <h3>{{titre}}</h3>
+        <p>{{texte}}</p>
       </div>
       <div class="boutons">
         <a href="#" class="validate" @click="viderDeck">OK</a>
