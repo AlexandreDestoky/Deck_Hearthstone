@@ -51,7 +51,6 @@ export default {
         priest: false,
         rogue: false,
       },
-      classeChoisie : "",
       deckVide: true,
       popUpChoiceTitre: "Vous avez déjà un deck pour une autre classe !",
       popUpChoiceTexte: "Si vous changer de classe, votre deck actuel sera supprimé",
@@ -65,6 +64,7 @@ export default {
     bus.$on("changementClasse", (data) => {
       this.deckVide = true;
       this.classChange(data);
+      localStorage.setItem("classe",data);
     });
   },
   mounted() {
@@ -79,12 +79,12 @@ export default {
      * Met l'image sélectionné en active et enlève le active des autres images
      */
     toggleActive(e) {
-      this.classeChoisie = e.target.parentNode.id;
-      localStorage.setItem("classe",this.classeChoisie);
-      if (this.deckVide) {
-        this.classChange(this.classeChoisie);
-      } else {
-        this.openPopUpChoice(this.classeChoisie); // si le deck n'est pas vide, on envoi le nom de la classe au popup
+      let nouvelleClasse = e.target.parentNode.id; // QUand on clique sur une classe, elle se met en classeCHoisie
+      if (this.deckVide) { // Si le deck est vide, on change le visuel de la classe choisie
+        this.classChange(nouvelleClasse);
+        localStorage.setItem("classe",nouvelleClasse); // Changement localStorage
+      } else { // SINON ON OUvre le popUp avec la nouvelle classe
+        this.openPopUpChoice(nouvelleClasse); // si le deck n'est pas vide, on envoi le nom de la classe au popup
       }
     },
     /**
