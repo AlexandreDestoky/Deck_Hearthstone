@@ -7,8 +7,13 @@
         <p>{{texte}}</p>
       </div>
       <div class="boutons">
-        <a href="#" class="validate" @click="viderDeck">OK</a>
-        <a href="#" class="cancel">ANNULER</a>
+        <!-- <a href="#" class="validate" @click="viderDeck">OK</a>
+        <a href="#" class="cancel">ANNULER</a> -->
+        <!-- <a href="#" class="validate" @click="viderDeck">OK</a> -->
+        <button class="validate" @click="viderDeck">OK</button>
+        <!-- <a href="#" class="cancel">ANNULER</a> -->
+        <button class="cancel">ANNULER</button>
+        
       </div>
     </div>
   </div>
@@ -95,7 +100,8 @@ export default {
   margin-top: 3em;
 }
 
-.boutons a {
+.boutons button {
+  outline: none;
   padding: 0.2em 1em;
   border: 2px solid black;
   border-radius: 20px;
@@ -115,7 +121,7 @@ export default {
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.336);
 }
 
-.boutons a:hover {
+.boutons button:hover {
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.336);
 }
 .cancel {
