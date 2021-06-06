@@ -2,34 +2,34 @@
   <div class="choixClasse">
     <!---------------------- CLASSE HEARTHSTONE-------------------- -->
     <div class="classeHS" :class="{ active: isActive['shaman'],incliquable:isActive['shaman'] }" id="shaman" @click="toggleActive">
-      <img src="../assets/images/chaman.jpg" alt="" />
+      <img src="../assets/images/chaman.jpg" alt="Portrait Classe Chaman" />
     </div>
     <div class="classeHS" :class="{ active: isActive['demon_hunter'],incliquable:isActive['demon_hunter'] }" id="demon_hunter" @click="toggleActive">
-      <img src="../assets/images/chasseur-de-demons.jpg" alt="" />
+      <img src="../assets/images/chasseur-de-demons.jpg" alt="Portrait Classe Chasseur de démons" />
     </div>
     <div class="classeHS" :class="{ active: isActive['hunter'],incliquable:isActive['hunter'] }" id="hunter" @click="toggleActive">
-      <img src="../assets/images/chasseur.jpg" alt="" />
+      <img src="../assets/images/chasseur.jpg" alt="Portrait Classe Chasseur" />
     </div>
     <div class="classeHS" :class="{ active: isActive['warlock'],incliquable:isActive['warlock'] }" id="warlock" @click="toggleActive">
-      <img src="../assets/images/demoniste.jpg" alt="" />
+      <img src="../assets/images/demoniste.jpg" alt="Portrait Classe Démoniste" />
     </div>
     <div class="classeHS" :class="{ active: isActive['druid'],incliquable:isActive['druid'] }" id="druid" @click="toggleActive">
-      <img src="../assets/images/druide.jpg" alt="" />
+      <img src="../assets/images/druide.jpg" alt="Portrait Classe Druide" />
     </div>
     <div class="classeHS" :class="{ active: isActive['warrior'],incliquable:isActive['warrior'] }" id="warrior" @click="toggleActive">
-      <img src="../assets/images/guerrier.jpg" alt="" />
+      <img src="../assets/images/guerrier.jpg" alt="Portrait Classe Guerrier" />
     </div>
     <div class="classeHS" :class="{ active: isActive['mage'],incliquable:isActive['mage'] }" id="mage" @click="toggleActive">
-      <img src="../assets/images/mage.jpg" alt="" />
+      <img src="../assets/images/mage.jpg" alt="Portrait Classe Mage" />
     </div>
     <div class="classeHS" :class="{ active: isActive['paladin'],incliquable:isActive['paladin'] }" id="paladin" @click="toggleActive">
-      <img src="../assets/images/paladin.jpg" alt="" />
+      <img src="../assets/images/paladin.jpg" alt="Portrait Classe Paladin" />
     </div>
     <div class="classeHS" :class="{ active: isActive['priest'],incliquable:isActive['priest'] }" id="priest" @click="toggleActive">
-      <img src="../assets/images/pretre.jpg" alt="" />
+      <img src="../assets/images/pretre.jpg" alt="Portrait Classe Prêtre" />
     </div>
     <div class="classeHS" :class="{ active: isActive['rogue'],incliquable:isActive['rogue'] }" id="rogue" @click="toggleActive">
-      <img src="../assets/images/voleur.jpg" alt="" />
+      <img src="../assets/images/voleur.jpg" alt="Portrait Classe Voleur" />
     </div>
   </div>
 </template>

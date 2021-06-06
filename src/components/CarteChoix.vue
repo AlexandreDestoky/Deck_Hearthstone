@@ -1,13 +1,16 @@
 <template>
   <!--------------------------- CARTE --------------------------->
   <div class="carteChoix col-12 col-md-8">
-    <!-- Affichage classes de carte-->
+    
+    <!-- Partie Choix Carte Classe / Neutre-->
     <div class="choixClasseCarte">
       <div class="classeDeck" @click="affichageClasse = true">
         {{ classeChoisie === undefined ? "CLASS" : formatageClasse(classeChoisie) }} CARDS
       </div>
       <div class="neutre" @click="affichageClasse = false">NEUTRAL CARDS</div>
     </div>
+
+    <!-- Partie Affichage des Cartes -->
     <div class="carteAffichage" :class="{ couleurClasse: affichageClasse, couleurNeutre: !affichageClasse }">
       <h1 v-if="classeChoisie === undefined" class="info-choix-classe">Please choose a class</h1>
       <div class="boxCard" v-else>
@@ -41,8 +44,8 @@ export default {
     return {
       classeChoisie: undefined,
       triChoisi: undefined,
-      tabCarte: undefined,
-      tabCarteClasse: undefined,
+      tabCarte: undefined, // Les cartes neutres
+      tabCarteClasse: undefined, // Les cartes de la classe choisie
       affichageClasse: true,
       couleurClasse: true,
       couleurNeutre: false,
@@ -50,36 +53,59 @@ export default {
     };
   },
   created() {
-    //On donne à tabCarte la liste des cartes standard
+    //On attribue les cartes neutres dés le chargement de la page
     this.tabCarte = this.fetchTest("NEUTRAL");
-    //On donne à classeChoisie la classe choisie dans le composant choixPerso
+    /**
+     * Réception de l'évenement "choixClasse"
+     * Actualisation de la classe choisie et des cartes de classes affichées
+     */
     bus.$on("choixClasse", (data) => {
       this.classeChoisie = data;
       this.tabCarteClasse = this.fetchTest(data);
     });
+    /**
+     * Réception de l'évenement "choixTri"
+     * On effectue le tri sur les cartes Neutres
+     * On effectue le tri sur les cartes de classes si il y a une classe choisie
+     */
     bus.$on("choixTri", (data) => {
       this.triChoisi = data;
       this.tabCarte = this.fetchTest("NEUTRAL", this.triChoisi);
       if (this.classeChoisie) this.tabCarteClasse = this.fetchTest(this.classeChoisie, this.triChoisi);
     });
+    /**
+     * Réception de l'évenement "cartePlusDispo"
+     * On ajoute la carte reçue de la liste de carte plus dispo
+     */
     bus.$on("cartePlusDispo", (data) => {
       this.cartesPlusDispo.push(data);
-      localStorage.setItem("plusDispo", JSON.stringify(this.cartesPlusDispo)); //LOCALE STORAGE -*-*-*-*-**-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*-*-*
+      localStorage.setItem("plusDispo", JSON.stringify(this.cartesPlusDispo)); //LocalStorage => on actualise la liste de carte plus dispo
     });
+    /**
+     * Réception de l'évenement "carteReDispo" 
+     * On enleve la carte reçue de la liste de carte plus dispo
+     */
     bus.$on("carteReDispo", (data) => {
       let index = this.cartesPlusDispo.indexOf(data);
       this.cartesPlusDispo.splice(index, 1);
-      localStorage.setItem("plusDispo", JSON.stringify(this.cartesPlusDispo)); //LOCALE STORAGE -*-*-*-*-**-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*-*-*
+      localStorage.setItem("plusDispo", JSON.stringify(this.cartesPlusDispo)); //LocalStorage => on actualise la liste de carte plus dispo
     });
-    /**Pop UP CHOICE */
+    /**
+     * Réception de l'évenement "vidagePlusDispo" suite a validation du popUpChoice
+     * Si true on vide la liste de carte plus dispo
+     */
     bus.$on("vidagePlusDispo", (data) => {
       if (data) {
         this.cartesPlusDispo = [];
-        localStorage.setItem("plusDispo", JSON.stringify(this.cartesPlusDispo)); //LOCALE STORAGE -*-*-*-*-**-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*-*-*
+        localStorage.setItem("plusDispo", JSON.stringify(this.cartesPlusDispo)); //LocalStorage => on actualise la liste de carte plus dispo
       }
     });
   },
   mounted() {
+    /**
+     * Si il y a un localStorage pour les cartes plusDispo
+     * On attribue la valeur à la liste de cartes plus dispo
+     */
     if (localStorage.getItem("plusDispo")) {
       try {
         this.cartesPlusDispo = JSON.parse(localStorage.getItem("plusDispo"));
@@ -89,6 +115,12 @@ export default {
     }
   },
   methods: {
+    /**
+     * Fonction de requète API
+     * @classe : la classe pour laquel effectué la requête
+     * @tris : les critères de tri à effectué 
+     * @return : Renvoi un tableau de cartes correspondante à la classe et au tri demandé
+     */
     fetchTest(classe, tris) {
       let tabTest = []; //le tableau qui va contenir toutes les cartes
       fetch(`https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/classes/${classe}?collectible=1`, {
@@ -123,7 +155,7 @@ export default {
                 }
                 //SSI tout les critères sont OK, on ajoute la carte au tableau
                 if (toutCritere === true) tabTest.push(carte);
-                //Si il n'y a pas de tri, on ajoute toutes les cartes standard
+              //Si il n'y a pas de tri, on ajoute toutes les cartes standard
               } else {
                 tabTest.push(carte);
               }
@@ -132,13 +164,25 @@ export default {
         });
       return tabTest;
     },
+    /**
+     * Fonction de formatage de la classe reçue
+     * @return la classe à laquelle on a enlevé les underscore et mise en majuscule
+     */
     formatageClasse(classe) {
       return classe.replace("_", " ").toUpperCase();
     },
+    /**
+     * Envoi de l'évenement "choixCarte"
+     * On envoi la carte sur laquel on clique au deck
+     */
     envoiCarte(carte) {
       bus.$emit("choixCarte", carte);
     },
+    /**
+     * Fonction d'envoi de données quand on Drag une carte 
+     */
     drag(ev) {
+      //Données viennent du dataSet
       ev.dataTransfer.setData("nom", ev.target.dataset.carteNom);
       ev.dataTransfer.setData("cout", ev.target.dataset.carteCout);
       ev.dataTransfer.setData("rarete", ev.target.dataset.carteRarete);
