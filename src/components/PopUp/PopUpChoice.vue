@@ -119,6 +119,13 @@ export default {
   color: #eee;
 }
 
+/* Smartphone affichage*/
+@media (max-width: 767.98px) {
+  .boutons button {
+    padding: 0.2em;
+  }
+}
+
 .valider {
   background-color: green;
 }
