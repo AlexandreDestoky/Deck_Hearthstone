@@ -5,19 +5,9 @@
       <label for="manaOption">Mana</label>
       <select id="manaOption" name="manaOption" v-model="triCards.cost" @change="envoiTri">
         <option value="all">All</option>
-        <option value="0">Mana: 0</option>
-        <option value="1">Mana: 1</option>
-        <option value="2">Mana: 2</option>
-        <option value="3">Mana: 3</option>
-        <option value="4">Mana: 4</option>
-        <option value="5">Mana: 5</option>
-        <option value="6">Mana: 6</option>
-        <option value="7">Mana: 7</option>
-        <option value="8">Mana: 8</option>
-        <option value="9">Mana: 9</option>
-        <option value="10">Mana: 10</option>
-        <option value="11">Mana: 11</option>
-        <option value="12">Mana: 12</option>
+        <template v-for="el in 13">
+          <option :value="el-1" :key="el">Mana : {{el-1}}</option>
+        </template>
       </select>
     </div>
     <div class="set col-12 col-md-3">
@@ -35,38 +25,18 @@
       <label for="attaqueOption">Attack</label>
       <select id="attaqueOption" name="attaqueOption" v-model="triCards.attack" @change="envoiTri">
         <option value="all">All</option>
-        <option value="0">Attaque: 0</option>
-        <option value="1">Attaque: 1</option>
-        <option value="2">Attaque: 2</option>
-        <option value="3">Attaque: 3</option>
-        <option value="4">Attaque: 4</option>
-        <option value="5">Attaque: 5</option>
-        <option value="6">Attaque: 6</option>
-        <option value="7">Attaque: 7</option>
-        <option value="8">Attaque: 8</option>
-        <option value="9">Attaque: 9</option>
-        <option value="10">Attaque: 10</option>
-        <option value="11">Attaque: 11</option>
-        <option value="12">Attaque: 12</option>
+        <template v-for="el in 13">
+          <option :value="el-1" :key="el">Attaque : {{el-1}}</option>
+        </template>
       </select>
     </div>
     <div class="vie col-12 col-md-3">
       <label for="vieOption">Health</label>
       <select id="vieOption" name="vieOption" v-model="triCards.health" @change="envoiTri">
         <option value="all">All</option>
-        <option value="0">Health: 0</option>
-        <option value="1">Health: 1</option>
-        <option value="2">Health: 2</option>
-        <option value="3">Health: 3</option>
-        <option value="4">Health: 4</option>
-        <option value="5">Health: 5</option>
-        <option value="6">Health: 6</option>
-        <option value="7">Health: 7</option>
-        <option value="8">Health: 8</option>
-        <option value="9">Health: 9</option>
-        <option value="10">Health: 10</option>
-        <option value="11">Health: 11</option>
-        <option value="12">Health: 12</option>
+        <template v-for="el in 13">
+          <option :value="el-1" :key="el">Health : {{el-1}}</option>
+        </template>
       </select>
     </div>
     <div class="typeCarte col-12 col-md-3">
@@ -138,7 +108,7 @@ export default {
   },
   methods: {
     /**
-     * Envoi de l'événement "choixtri" 
+     * Envoi de l'évenement "choixtri" 
      * les données envoyés sont les différents tri
      */
     envoiTri() {

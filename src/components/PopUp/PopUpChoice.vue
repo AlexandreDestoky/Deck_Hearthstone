@@ -1,5 +1,4 @@
 <template>
-  <!-- MODALE -->
   <div class="popUp" :class="{ invisible: popUpInvisible }" @click="removePopUp">
     <div class="textBox">
       <div class="contenu">
@@ -7,13 +6,8 @@
         <p>{{texte}}</p>
       </div>
       <div class="boutons">
-        <!-- <a href="#" class="validate" @click="viderDeck">OK</a>
-        <a href="#" class="cancel">ANNULER</a> -->
-        <!-- <a href="#" class="validate" @click="viderDeck">OK</a> -->
         <button class="validate" @click="viderDeck">OK</button>
-        <!-- <a href="#" class="cancel">ANNULER</a> -->
         <button class="cancel">ANNULER</button>
-        
       </div>
     </div>
   </div>
@@ -31,25 +25,38 @@ export default {
     };
   },
   created() {
+    /**
+     * Réception de l'évenement "popUpChoiceVisible"
+     * Affiche le popUp en lui donnant les infos dont il a besoin
+     */
     bus.$on("popUpChoiceVisible", (data) => {
+      //On attribue les données reçue
       this.titre = data[0];
       this.texte = data[1];
       this.nomNouvelleClasse = data[2];
+      // On rend le popUp visible
       this.popUpInvisible = false;
     });
   },
   methods: {
+    /**
+     * Fonction de dissimulation du popUp
+     */
     removePopUp(e) {
+      // Le popUp disparait si on clique sur le bouton annuler ou en dehors du popUp
       if (e.target.classList.contains("popUp") || e.target.classList.contains("cancel")) {
         this.popUpInvisible = true;
       }
     },
+    /**
+     * Fonction de vidage du deck lors de changement de classe (avec carte dans deck)
+     */
     viderDeck() {
-      bus.$emit("vidageDeck",true);
+      bus.$emit("vidageDeck",true); // on informe le deck qu'il peut vider le deck
       bus.$emit("changementClasse",this.nomNouvelleClasse); // on informe ChoixPerso que l'on veut changer de classe
-      bus.$emit("vidagePlusDispo", true);
-      this.popUpInvisible = true;
-      localStorage.removeItem("deckListe");
+      bus.$emit("vidagePlusDispo", true); // on informe carteChoix que toutes les cartes sont redispo
+      this.popUpInvisible = true; // dissimulation du popUp
+      localStorage.removeItem("deckListe"); //LocalStorage => ont supprime la deckListe
     }
   },
 };

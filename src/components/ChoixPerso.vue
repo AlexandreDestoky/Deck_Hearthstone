@@ -57,10 +57,17 @@ export default {
     };
   },
   created() {
-    //Le nombre de cartes reçu par le deck 
+    /**
+     * Réception de l'évenement "nbrCartes"
+     * Sert à savoir si le deck est vide ou non
+     */
     bus.$on("nbrCartes", (data) => {
-      this.deckVide = data;
+      this.deckVide = data; 
     });
+    /**
+     * Réception de l'évenement "changementClasse"
+     * (Lorsque l'on valide le popUpChoice)
+     */
     bus.$on("changementClasse", (data) => {
       this.deckVide = true;
       this.classChange(data);
@@ -68,6 +75,10 @@ export default {
     });
   },
   mounted() {
+    /**
+     * Si il y a un localStorage pour la classe
+     * On effectue les changements de classe
+     */
     if (localStorage.getItem("classe")) {
       let classe = localStorage.getItem("classe");
       this.classChange(classe);
@@ -76,40 +87,42 @@ export default {
   },
   methods: {
     /**
-     * Met l'image sélectionné en active et enlève le active des autres images
+     * Fonction de test si le deck est vide ou non lorsque l'on change de classe
      */
     toggleActive(e) {
-      let nouvelleClasse = e.target.parentNode.id; // QUand on clique sur une classe, elle se met en classeCHoisie
-      if (this.deckVide) { // Si le deck est vide, on change le visuel de la classe choisie
+      let nouvelleClasse = e.target.parentNode.id;
+      if (this.deckVide) {
         this.classChange(nouvelleClasse);
-        localStorage.setItem("classe",nouvelleClasse); // Changement localStorage
-      } else { // SINON ON OUvre le popUp avec la nouvelle classe
+        localStorage.setItem("classe",nouvelleClasse); //LocalStorage => le nom de la classe change
+      } else { 
         this.openPopUpChoice(nouvelleClasse); // si le deck n'est pas vide, on envoi le nom de la classe au popup
       }
     },
     /**
-     * On envoi le nom de la classe
+     * Fonction de changement de classe
+     */
+    classChange(nouvelleClasse) {
+      //Change le visuel pour que l'on voit la nouvelle classe (bordure verte)
+      for (let el in this.isActive) this.isActive[el] = false;
+      this.isActive[nouvelleClasse] = true;
+      // Lance la fonction qui émet l'évenement choixClasse 
+      this.envoiChoixClasse(nouvelleClasse);
+    },
+    /**
+     * Envoi de l'évenement "choixClasse"
+     * (Les autres composants auront accès au nom de la nouvelle classe)
      */
     envoiChoixClasse(nomClasse) {
       bus.$emit("choixClasse", nomClasse);
     },
     /**
-     * On ouvre le pop up de CHOIX
+     * Envoi de l'évenement "popUpChoiceVisible"
+     * On envoi le titre et texte que l'on veut dans le popUp et le nom de la nouvelle classe choisie
      */
     openPopUpChoice(nouvelleClasse) {
       bus.$emit("popUpChoiceVisible", [this.popUpChoiceTitre, this.popUpChoiceTexte, nouvelleClasse]);
     },
-    /**
-     * Changment de classe
-     */
-    classChange(nouvelleClasse) {
-      for (let el in this.isActive) {
-        this.isActive[el] = false;
-      }
-      this.isActive[nouvelleClasse] = true; // on met la classe choisie en true
-      this.choixClasse = nouvelleClasse;
-      this.envoiChoixClasse(nouvelleClasse);
-    },
+
   },
 };
 </script>

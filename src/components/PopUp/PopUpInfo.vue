@@ -1,5 +1,4 @@
 <template>
-  <!-- MODALE -->
   <div class="popUp" :class="{ invisible: popUpInvisible }" @click="removePopUp">
     <div class="textBox">
       <span class="croix">❌</span>
@@ -23,22 +22,23 @@ export default {
   },
     created() {
     /**
-     * Reception de l'évenement "popUpInfoVisible"
-     * On attribue les données reçue au titre et texte du popUp
-     * On rend le popUp visible
+     * Réception de l'évenement "popUpInfoVisible"
+     * Affiche le popUp en lui donnant les infos dont il a besoin
      */
     bus.$on("popUpInfoVisible", (data)=> {
+      //On attribue les données reçue au titre et texte du popUp
       this.titre = data[0];
       this.texte = data[1];
+      // On rend le popUp visible
       this.popUpInvisible = false;
     })
   },
   methods: {
     /**
      * Fonction de dissimulation du popUp
-     * S'active si on clique sur la croix rouge ou en dehors du popUp
      */
     removePopUp(e) {
+      // Le popUp disparait si on clique sur la croix rouge ou en dehors du popUp
       if (e.target.classList.contains("popUp") || e.target.classList.contains("croix")) {
         this.popUpInvisible = true;
       }

@@ -132,9 +132,6 @@ export default {
     envoiCartePlusDispo(nomCarte) {
       bus.$emit("cartePlusDispo", nomCarte);
     },
-    envoiNbrCartes() {
-      bus.$emit("nbrCartes", this.deckList.length === 0);
-    },
     /**
      * Fonction d'envoi de l'information qu'une carte est de nouveau disponible
      * (nombre maximum dans un deck n'est plus atteint)
@@ -142,29 +139,28 @@ export default {
     envoiCarteReDispo(nomCarte) {
       bus.$emit("carteReDispo", nomCarte);
     },
+    /**
+     * Envoi de l'évenement "nbrCartes"
+     * On envoi true si le deck est vide, faut si il ne l'est pas
+     */
+    envoiNbrCartes() {
+      bus.$emit("nbrCartes", this.deckList.length === 0);
+    },
+    /**
+     * Fonction de changement de la couleur du nom de la carte dans le deck
+     */
     changementCouleur(rarete) {
-      let couleur;
       switch (rarete) {
         case "Legendary":
-          couleur = "#fdc500";
-          break;
+          return "#fdc500";
         case "Epic":
-          couleur = "#ce11ce";
-          break;
+          return "#ce11ce";
         case "Rare":
-          couleur = "#4899f4";
-          break;
+          return "#4899f4";
         default:
-          couleur = "#eee";
-          break;
+          return "#eee";
       }
-      return couleur;
     },
-    // removePopUp(e) {
-    //   if (e.target.classList.contains("popUp") || e.target.classList.contains("croix")) {
-    //     this.popUpInvisible = true;
-    //   }
-    // },
     triDeckListe() {
       this.deckList.sort((a, b) => a.cost - b.cost || a.name.localeCompare(b.name));
     },
