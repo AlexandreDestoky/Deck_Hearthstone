@@ -6,13 +6,13 @@
       <p>{{ nbrCarte }}/30</p>
     </div>
     <div class="deckListe" @drop="drop" @dragover="allowDrop">
-      <div class="carteListe" v-for="el of deckList" :key="el.name" @click="removeCard">
-        <p class="coutMana">{{ el.cost }}</p>
-        <p class="nom" :style="{ color: changementCouleur(el.rarity) }">{{ el.name }}</p>
-        <p class="nbrExemplaire">X{{ el.copy }}</p>
+      <div class="carteListe" v-for="carte of deckListe" :key="carte.name" @click="supprimeCarte">
+        <p class="coutMana">{{ carte.cost }}</p>
+        <p class="nom" :style="{ color: changementCouleur(carte.rarity) }">{{ carte.name }}</p>
+        <p class="nbrExemplaire">X{{ carte.copy }}</p>
       </div>
       <!-- Si il n'y a pas de carte dans le deck on donne les instructions -->
-      <h1 v-if="this.deckList.length === 0" class="info-deck">Click or drag cards to add them</h1>
+      <h1 v-if="this.deckListe.length === 0" class="info-deck">Click or drag cards to add them</h1>
     </div>
   </div>
 </template>
@@ -22,7 +22,7 @@ import { bus } from "../main";
 export default {
   data() {
     return {
-      deckList: [], //Liste des cartes dans deck
+      deckListe: [], //Liste des cartes dans deck
       nbrCarte: 0, //Compteur
       popUpInfoTitre: "Votre deck est plein !",
       popUpInfoTexte: "Vous devez d'abord retirer une carte avant d'en ajouter une.",
@@ -36,7 +36,7 @@ export default {
      */
     bus.$on("choixCarte", (data) => {
       data.copy = 1; // on met un exemplaire par défaut
-      this.alreadyInDeck(data.name, [data]);
+      this.ajouteCarte(data.name, [data]);
     });
     /**
      * Réception de l'évenement "vidageDeck"
@@ -44,7 +44,7 @@ export default {
      */
     bus.$on("vidageDeck", (data) => {
       if (data) {
-        this.deckList = [];
+        this.deckListe = [];
         this.nbrCarte = 0;
       }
     });
@@ -64,10 +64,10 @@ export default {
      */
     if (localStorage.getItem("deckListe")) {
       try {
-        this.deckList = JSON.parse(localStorage.getItem("deckListe"));
+        this.deckListe = JSON.parse(localStorage.getItem("deckListe"));
         this.envoiNbrCartes();
         // Compteur devient le nombre de copie dans le deck
-        this.nbrCarte = this.deckList.reduce(function(a, b) {
+        this.nbrCarte = this.deckListe.reduce(function(a, b) {
           return a + b.copy;
         }, 0);
       } catch (e) {
@@ -91,25 +91,25 @@ export default {
       let coutCarte = ev.dataTransfer.getData("cout");
       let nomCarte = ev.dataTransfer.getData("nom");
       let rareteCarte = ev.dataTransfer.getData("rarete");
-      this.alreadyInDeck(nomCarte, [{ name: nomCarte, cost: coutCarte, rarity: rareteCarte, copy: 1 }]);
+      this.ajouteCarte(nomCarte, [{ name: nomCarte, cost: coutCarte, rarity: rareteCarte, copy: 1 }]);
     },
     /**
      * Fonction de test si une carte est déja dans le deck
      */
-    alreadyInDeck(nomdeCarte, [carteApusher]) {
+    ajouteCarte(nomdeCarte, [carteApusher]) {
       if (this.nbrCarte < 30) {
         this.nbrCarte++; //compteur de carte augmente
-        let indexTest = this.deckList.findIndex((obj) => obj.name === nomdeCarte);
+        let indexTest = this.deckListe.findIndex((obj) => obj.name === nomdeCarte);
         //Si l'a carte n'est pas dans la liste du deck, on l'ajoute, sinon on met la copie à 1 (sauf légendaire)
         if (indexTest === -1) {
-          this.deckList.push(carteApusher);
-          this.triDeckListe();
-          localStorage.setItem("deckListe", JSON.stringify(this.deckList)); //LocalStorage => on actualise la deckListe
+          this.deckListe.push(carteApusher);
+          this.trideckListe();
+          localStorage.setItem("deckListe", JSON.stringify(this.deckListe)); //LocalStorage => on actualise la deckListe
           if (carteApusher.rarity === "Legendary") this.envoiCartePlusDispo(carteApusher.name); //la carte n'est plus dispo après 1 exemplaire si légendaire
         } else {
-          this.deckList[indexTest].copy = 2;
-          localStorage.setItem("deckListe", JSON.stringify(this.deckList)); //LocalStorage => on actualise la deckListe
-          this.envoiCartePlusDispo(this.deckList[indexTest].name); //la carte n'est plus dispo après 2 exemplaire
+          this.deckListe[indexTest].copy = 2;
+          localStorage.setItem("deckListe", JSON.stringify(this.deckListe)); //LocalStorage => on actualise la deckListe
+          this.envoiCartePlusDispo(this.deckListe[indexTest].name); //la carte n'est plus dispo après 2 exemplaire
         }
         this.envoiNbrCartes(); // on informe qu'il y a des cartes
       } else {
@@ -119,7 +119,7 @@ export default {
     /**
      * Fonction Pour enlever une carte du deck
      */
-    removeCard(e) {
+    supprimeCarte(e) {
       this.nbrCarte--; //compteur de carte diminue
       let nomCarte;
       if (e.target.parentNode.classList.contains("carteListe")) {
@@ -128,18 +128,18 @@ export default {
         nomCarte = e.target.childNodes[1].textContent; //si on clique sur les .carteListe sans cliquer sur élément qui la compose
       }
 
-      let Carte = this.deckList.find((el) => el.name === nomCarte); //la carte dans la deckList
-      let indexTest = this.deckList.findIndex((obj) => obj.name === nomCarte);
+      let Carte = this.deckListe.find((el) => el.name === nomCarte); //la carte dans la deckListe
+      let indexTest = this.deckListe.findIndex((obj) => obj.name === nomCarte);
 
       if (Carte.copy === 2) {
-        this.deckList[indexTest].copy = 1;
-        localStorage.setItem("deckListe", JSON.stringify(this.deckList)); //LocalStorage => on actualise la deckListe
-        this.envoiCarteReDispo(this.deckList[indexTest].name); // envoi info que carte de nouveau disponible
+        this.deckListe[indexTest].copy = 1;
+        localStorage.setItem("deckListe", JSON.stringify(this.deckListe)); //LocalStorage => on actualise la deckListe
+        this.envoiCarteReDispo(this.deckListe[indexTest].name); // envoi info que carte de nouveau disponible
         this.$forceUpdate(); //force la mise a jour de l'affichage pour voir suppression
       } else {
-        if (this.deckList[indexTest].rarity === "Legendary") this.envoiCarteReDispo(this.deckList[indexTest].name); //si légendaire, dispo seulement quand plus d'exemplaire
-        this.deckList.splice(indexTest, 1); // on enleve la carte de la decklist
-        localStorage.setItem("deckListe", JSON.stringify(this.deckList)); //LocalStorage => on actualise la deckListe
+        if (this.deckListe[indexTest].rarity === "Legendary") this.envoiCarteReDispo(this.deckListe[indexTest].name); //si légendaire, dispo seulement quand plus d'exemplaire
+        this.deckListe.splice(indexTest, 1); // on enleve la carte de la deckListe
+        localStorage.setItem("deckListe", JSON.stringify(this.deckListe)); //LocalStorage => on actualise la deckListe
       }
       this.envoiNbrCartes(); //Envoi info de si le deck est vide ou non
     },
@@ -164,7 +164,14 @@ export default {
      * On envoi true si le deck est vide, false si il ne l'est pas
      */
     envoiNbrCartes() {
-      bus.$emit("nbrCartes", this.deckList.length === 0);
+      bus.$emit("nbrCartes", this.deckListe.length === 0);
+    },
+    /**
+     * Envoi de l'évenement "popUpInfoVisible"
+     * On envoi le titre et texte que l'on veut dans le popUp
+     */
+    openPopUpInfo() {
+      bus.$emit("popUpInfoVisible", [this.popUpInfoTitre, this.popUpInfoTexte]);
     },
     /**
      * Fonction de changement de la couleur du nom de la carte dans le deck
@@ -185,15 +192,8 @@ export default {
     /**
      * Fonction de tri de la deck liste par cout en mana puis par ordre alphabétique de non
      */
-    triDeckListe() {
-      this.deckList.sort((a, b) => a.cost - b.cost || a.name.localeCompare(b.name));
-    },
-    /**
-     * Envoi de l'évenement "popUpInfoVisible"
-     * On envoi le titre et texte que l'on veut dans le popUp
-     */
-    openPopUpInfo() {
-      bus.$emit("popUpInfoVisible", [this.popUpInfoTitre, this.popUpInfoTexte]);
+    trideckListe() {
+      this.deckListe.sort((a, b) => a.cost - b.cost || a.name.localeCompare(b.name));
     },
     /**
      * Fonction de formatage de la classe reçue

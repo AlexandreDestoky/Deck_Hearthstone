@@ -1,5 +1,5 @@
 <template>
-  <div class="popUp" :class="{ invisible: popUpInvisible }" @click="removePopUp">
+  <div class="popUp" :class="{ invisible: popUpInvisible }" @click="dissimulePopUp">
     <div class="textBox">
       <span class="croix">❌</span>
       <div class="contenu">
@@ -37,7 +37,7 @@ export default {
     /**
      * Fonction de dissimulation du popUp
      */
-    removePopUp(e) {
+    dissimulePopUp(e) {
       // Le popUp disparait si on clique sur la croix rouge ou en dehors du popUp
       if (e.target.classList.contains("popUp") || e.target.classList.contains("croix")) {
         this.popUpInvisible = true;

@@ -16,20 +16,20 @@
       <div class="boxCard" v-else>
         <div
           class="carte"
-          v-for="tabObj of affichageClasse ? tabCarteClasse : tabCarte"
-          :key="tabObj.cardId"
-          :class="{ indisponible: cartesPlusDispo.includes(tabObj.name) }"
+          v-for="carte of affichageClasse ? tabCarteClasse : tabCarteNeutre"
+          :key="carte.cardId"
+          :class="{ indisponible: cartesPlusDispo.includes(carte.name) }"
         >
           <img
-            :src="tabObj.img"
-            :alt="tabObj.name"
-            @click="envoiCarte(tabObj)"
+            :src="carte.img"
+            :alt="carte.name"
+            @click="envoiCarte(carte)"
             draggable="true"
             @dragstart="drag"
-            :id="tabObj.cardId"
-            :data-carte-nom="tabObj.name"
-            :data-carte-cout="tabObj.cost"
-            :data-carte-rarete="tabObj.rarity"
+            :id="carte.cardId"
+            :data-carte-nom="carte.name"
+            :data-carte-cout="carte.cost"
+            :data-carte-rarete="carte.rarity"
           />
         </div>
       </div>
@@ -44,24 +44,22 @@ export default {
     return {
       classeChoisie: undefined,
       triChoisi: undefined,
-      tabCarte: undefined, // Les cartes neutres
+      tabCarteNeutre: undefined, // Les cartes neutres
       tabCarteClasse: undefined, // Les cartes de la classe choisie
-      affichageClasse: true,
-      couleurClasse: true,
-      couleurNeutre: false,
+      affichageClasse: true, // Par défaut on affichage les cartes de classes
       cartesPlusDispo: [],
     };
   },
   created() {
     //On attribue les cartes neutres dés le chargement de la page
-    this.tabCarte = this.fetchTest("NEUTRAL");
+    this.tabCarteNeutre = this.requeteApi("NEUTRAL");
     /**
      * Réception de l'évenement "choixClasse"
      * Actualisation de la classe choisie et des cartes de classes affichées
      */
     bus.$on("choixClasse", (data) => {
       this.classeChoisie = data;
-      this.tabCarteClasse = this.fetchTest(data);
+      this.tabCarteClasse = this.requeteApi(data);
     });
     /**
      * Réception de l'évenement "choixTri"
@@ -70,8 +68,8 @@ export default {
      */
     bus.$on("choixTri", (data) => {
       this.triChoisi = data;
-      this.tabCarte = this.fetchTest("NEUTRAL", this.triChoisi);
-      if (this.classeChoisie) this.tabCarteClasse = this.fetchTest(this.classeChoisie, this.triChoisi);
+      this.tabCarteNeutre = this.requeteApi("NEUTRAL", this.triChoisi);
+      if (this.classeChoisie) this.tabCarteClasse = this.requeteApi(this.classeChoisie, this.triChoisi);
     });
     /**
      * Réception de l'évenement "cartePlusDispo"
@@ -121,8 +119,8 @@ export default {
      * @tris : les critères de tri à effectué 
      * @return : Renvoi un tableau de cartes correspondante à la classe et au tri demandé
      */
-    fetchTest(classe, tris) {
-      let tabTest = []; //le tableau qui va contenir toutes les cartes
+    requeteApi(classe, tris) {
+      let tabFetch = []; //le tableau qui va contenir toutes les cartes
       fetch(`https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/classes/${classe}?collectible=1`, {
         method: "GET",
         headers: {
@@ -154,15 +152,15 @@ export default {
                   }
                 }
                 //SSI tout les critères sont OK, on ajoute la carte au tableau
-                if (toutCritere === true) tabTest.push(carte);
+                if (toutCritere === true) tabFetch.push(carte);
               //Si il n'y a pas de tri, on ajoute toutes les cartes standard
               } else {
-                tabTest.push(carte);
+                tabFetch.push(carte);
               }
             }
           }
         });
-      return tabTest;
+      return tabFetch;
     },
     /**
      * Fonction de formatage de la classe reçue

@@ -3,7 +3,7 @@
   <div class="barreTri">
     <div class="mana col-12 col-md-3">
       <label for="manaOption">Mana</label>
-      <select id="manaOption" name="manaOption" v-model="triCards.cost" @change="envoiTri">
+      <select id="manaOption" name="manaOption" v-model="triCartes.cost" @change="envoiTri">
         <option value="all">All</option>
         <template v-for="el in 13">
           <option :value="el-1" :key="el">Mana : {{el-1}}</option>
@@ -12,7 +12,7 @@
     </div>
     <div class="set col-12 col-md-3">
       <label for="setOption">Set</label>
-      <select id="setOption" name="setOption" v-model="triCards.cardSet" @change="envoiTri">
+      <select id="setOption" name="setOption" v-model="triCartes.cardSet" @change="envoiTri">
         <option value="all">All</option>
         <option value="Core">Core Set</option>
         <option value="Ashes of Outland">Ashes of Outland</option>
@@ -23,7 +23,7 @@
     </div>
     <div class="attaque col-12 col-md-3">
       <label for="attaqueOption">Attack</label>
-      <select id="attaqueOption" name="attaqueOption" v-model="triCards.attack" @change="envoiTri">
+      <select id="attaqueOption" name="attaqueOption" v-model="triCartes.attack" @change="envoiTri">
         <option value="all">All</option>
         <template v-for="el in 13">
           <option :value="el-1" :key="el">Attaque : {{el-1}}</option>
@@ -32,7 +32,7 @@
     </div>
     <div class="vie col-12 col-md-3">
       <label for="vieOption">Health</label>
-      <select id="vieOption" name="vieOption" v-model="triCards.health" @change="envoiTri">
+      <select id="vieOption" name="vieOption" v-model="triCartes.health" @change="envoiTri">
         <option value="all">All</option>
         <template v-for="el in 13">
           <option :value="el-1" :key="el">Health : {{el-1}}</option>
@@ -41,7 +41,7 @@
     </div>
     <div class="typeCarte col-12 col-md-3">
       <label for="typeCarteOption">Type</label>
-      <select id="typeCarteOption" name="typeCarteOption" v-model="triCards.type" @change="envoiTri">
+      <select id="typeCarteOption" name="typeCarteOption" v-model="triCartes.type" @change="envoiTri">
         <option value="all">All</option>
         <option value="Heros">Heros</option>
         <option value="Minion">Minion</option>
@@ -51,7 +51,7 @@
     </div>
     <div class="race col-12 col-md-3">
       <label for="raceOption">Race</label>
-      <select id="raceOption" name="raceOption" v-model="triCards.race" @change="envoiTri">
+      <select id="raceOption" name="raceOption" v-model="triCartes.race" @change="envoiTri">
         <option value="all">All</option>
         <option value="Beast">Beast</option>
         <option value="Demon">Demon</option>
@@ -65,7 +65,7 @@
     </div>
     <div class="rarete col-12 col-md-3">
       <label for="rareteOption">Rarity</label>
-      <select id="rareteOption" name="rareteOption" v-model="triCards.rarity" @change="envoiTri">
+      <select id="rareteOption" name="rareteOption" v-model="triCartes.rarity" @change="envoiTri">
         <option value="all">All</option>
         <option value="Common">Common</option>
         <option value="Rare">Rare</option>
@@ -75,7 +75,7 @@
     </div>
     <div class="spellSchool col-12 col-md-3">
       <label for="spellSchoolOption">Spell School</label>
-      <select id="mecaniqueOption" name="mecaniqueOption" v-model="triCards.spellSchool" @change="envoiTri">
+      <select id="mecaniqueOption" name="mecaniqueOption" v-model="triCartes.spellSchool" @change="envoiTri">
         <option value="all">All</option>
         <option value="Arcane">Arcane</option>
         <option value="Fire">Fire</option>
@@ -94,7 +94,7 @@ import {bus} from "../main"
 export default {
   data() {
     return {
-      triCards : {
+      triCartes : {
         cost : "all",
         cardSet : "all",
         attack : "all",
@@ -112,7 +112,7 @@ export default {
      * les données envoyés sont les différents tri
      */
     envoiTri() {
-      bus.$emit("choixTri",this.triCards); 
+      bus.$emit("choixTri",this.triCartes); 
     }
   },
 };

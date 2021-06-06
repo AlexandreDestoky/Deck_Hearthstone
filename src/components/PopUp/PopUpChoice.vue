@@ -1,13 +1,13 @@
 <template>
-  <div class="popUp" :class="{ invisible: popUpInvisible }" @click="removePopUp">
+  <div class="popUp" :class="{ invisible: popUpInvisible }" @click="dissimulePopUp">
     <div class="textBox">
       <div class="contenu">
         <h3>{{titre}}</h3>
         <p>{{texte}}</p>
       </div>
       <div class="boutons">
-        <button class="validate" @click="viderDeck">OK</button>
-        <button class="cancel">ANNULER</button>
+        <button class="valider" @click="viderDeck">OK</button>
+        <button class="annuler">ANNULER</button>
       </div>
     </div>
   </div>
@@ -42,9 +42,9 @@ export default {
     /**
      * Fonction de dissimulation du popUp
      */
-    removePopUp(e) {
+    dissimulePopUp(e) {
       // Le popUp disparait si on clique sur le bouton annuler ou en dehors du popUp
-      if (e.target.classList.contains("popUp") || e.target.classList.contains("cancel")) {
+      if (e.target.classList.contains("popUp") || e.target.classList.contains("annuler")) {
         this.popUpInvisible = true;
       }
     },
@@ -119,11 +119,11 @@ export default {
   color: #eee;
 }
 
-.validate {
+.valider {
   background-color: green;
 }
 
-.validate:hover {
+.valider:hover {
   background-color: #0b380b;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.336);
 }
@@ -131,11 +131,11 @@ export default {
 .boutons button:hover {
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.336);
 }
-.cancel {
+.annuler {
   background-color: firebrick;
   display: table;
 }
-.cancel:hover {
+.annuler:hover {
   background-color: #6f0a0a;
 }
 </style>
