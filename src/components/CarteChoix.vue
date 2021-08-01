@@ -139,7 +139,8 @@ export default {
               carte.cardSet === "Ashes of Outland" ||
               carte.cardSet === "Scholomance Academy" ||
               carte.cardSet === "Madness At The Darkmoon Faire" ||
-              carte.cardSet === "Forged in the Barrens"
+              carte.cardSet === "Forged in the Barrens" ||
+              carte.cardSet === "United in Stormwind"
             ) {
               //Si il y a un tri
               if (tris != undefined) {
